@@ -24,6 +24,16 @@ const routes = [
     path: '/signup',
     name: 'SignUp',
     component: () => import('../views/SignUp.vue')
+  },
+  {
+    path: '/homeclient',
+    name: 'Home Client',
+    component: () => import('../views/client/HomeClient.vue')
+  },
+  {
+    path: '/homedesigner',
+    name: 'Home Designer',
+    component: () => import('../views/designer/HomeDesigner.vue')
   }
 ]
 
