@@ -51,7 +51,18 @@ export default {
 	name: 'Home Client',
 	components: {
 		Navbar,
-	}
+	},
+	mounted() {
+		if (localStorage.getItem("reloadedhomeclient")) {
+		// The page was just reloaded. Clear the value from local storage
+		// so that it will reload the next time this page is visited.
+		localStorage.removeItem("reloadedhomeclient");
+		} else {
+		// Set a flag so that we know not to reload the page twice.
+		localStorage.setItem("reloadedhomeclient", "1");
+		location.reload();
+		}
+	},
 }
 </script>
 

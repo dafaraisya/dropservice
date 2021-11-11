@@ -15,18 +15,38 @@
         
         <div class="d-flex flex-row align-items-center">
             <div class="bg-black rounded-pill py-2 px-3 me-3 text-white">
-                DESIGNER
+                {{ profileRole.toUpperCase() }}
             </div>
-            <div id="circle" class="rounded-circle bg-warning">
-                <img src="" alt="">
+            <div @click.prevent="signOut" id="circle" class="rounded-circle bg-black">
+				<div class="mt-1"></div>
+				<span class="initial-name mt-5">{{ this.$store.state.profileInitials }}</span>
             </div>
         </div>
     </nav>
 </template>
 
 <script>
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
 export default {
     name: 'Navbar',
+	data() {
+		return {
+			profileRole: ''
+		}
+	},
+	mounted() {
+		setTimeout(() => {
+			this.profileRole = this.$store.state.profileRole;
+		}, 1000);
+	},
+	methods: {
+		async signOut() {
+			await firebase.auth().signOut().then(() => {
+				this.$router.push('/');
+			})
+		}
+	}
 }
 </script>
 
@@ -67,5 +87,11 @@ export default {
         height: 40px;
         width: 40px;
     }
+
+	.initial-name {
+		font-size: 22px;
+		color: white;
+	}
+	
 
 </style>

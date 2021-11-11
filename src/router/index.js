@@ -1,45 +1,57 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
+import store from '../store/index'
 import Home from '../views/Home.vue'
 
 const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  },
-  {
-    path: '/signin',
-    name: 'SignIn',
-    component: () => import('../views/SignIn.vue')
-  },
-  {
-    path: '/signup',
-    name: 'SignUp',
-    component: () => import('../views/SignUp.vue')
-  },
-  {
-    path: '/homeclient',
-    name: 'Home Client',
-    component: () => import('../views/client/HomeClient.vue')
-  },
-  {
-    path: '/homedesigner',
-    name: 'Home Designer',
-    component: () => import('../views/designer/HomeDesigner.vue')
-  }
+	{
+		path: '/',
+		name: 'Home',
+		component: Home
+	},
+	{
+		path: '/signin',
+		name: 'SignIn',
+		component: () => import('../views/SignIn.vue')
+	},
+	{
+		path: '/signup',
+		name: 'SignUp',
+		component: () => import('../views/SignUp.vue')
+	},
+	{
+		path: '/chooserole/:uid',
+		name: 'ChooseRole',
+		component: () => import('../views/ChooseRole.vue')
+	},
+	{
+		path: '/homeclient',
+		name: 'Home Client',
+		component: () => import('../views/client/HomeClient.vue')
+	},
+	{
+		path: '/homedesigner',
+		name: 'Home Designer',
+		component: () => import('../views/designer/HomeDesigner.vue')
+	}
 ]
 
 const router = createRouter({
-  history: createWebHashHistory(),
-  routes
+	history: createWebHistory(),
+	routes
 })
+
+router.beforeEach((to, from, next) => {
+	if (to.fullPath === '/homeclient') {
+		if (!store.state.user) {
+			next('/signin');
+		}
+	}
+	if (to.fullPath === '/homedesigner') {
+		if (!store.state.user) {
+			next('/signin');
+		}
+	}
+	next();
+});
 
 export default router
