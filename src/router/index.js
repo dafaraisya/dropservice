@@ -32,6 +32,11 @@ const routes = [
 		path: '/homedesigner',
 		name: 'Home Designer',
 		component: () => import('../views/designer/HomeDesigner.vue')
+	},
+	{
+		path: '/portofoliodetails',
+		name: 'Portofolio Details',
+		component: () => import('../views/designer/PortoDetails.vue')
 	}
 ]
 

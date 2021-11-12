@@ -11,6 +11,19 @@
             <div class="card-img card-img-top bg-info rounded"></div>
             <div class="card-body">
               <p class="card-title fw-bold">Object Design</p>
+              <router-link to="/portofoliodetails">
+                <button type="button" class="btn btn-secondary mt-2">
+                  More Info
+                </button>
+              </router-link>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card pt-4 pb-2">
+            <div class="card-img card-img-top bg-info rounded"></div>
+            <div class="card-body">
+              <p class="card-title fw-bold">Video Intro</p>
               <button type="button" class="btn btn-secondary mt-2">
                 More Info
               </button>
@@ -21,7 +34,7 @@
           <div class="card pt-4 pb-2">
             <div class="card-img card-img-top bg-info rounded"></div>
             <div class="card-body">
-              <p class="card-title fw-bold">Object Design</p>
+              <p class="card-title fw-bold">Video Bumper</p>
               <button type="button" class="btn btn-secondary mt-2">
                 More Info
               </button>
@@ -32,18 +45,7 @@
           <div class="card pt-4 pb-2">
             <div class="card-img card-img-top bg-info rounded"></div>
             <div class="card-body">
-              <p class="card-title fw-bold">Object Design</p>
-              <button type="button" class="btn btn-secondary mt-2">
-                More Info
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card pt-4 pb-2">
-            <div class="card-img card-img-top bg-info rounded"></div>
-            <div class="card-body">
-              <p class="card-title fw-bold">Object Design</p>
+              <p class="card-title fw-bold">Video Animasi</p>
               <button type="button" class="btn btn-secondary mt-2">
                 More Info
               </button>
