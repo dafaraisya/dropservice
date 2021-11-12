@@ -15,7 +15,7 @@
                         <textarea class="form-control px-2 border-0 shadow-none fw-light" placeholder="Your description here" rows="3"></textarea>
                     </Tab>
                     <Tab class="mt-1" :isSelected="selected === 'How to Order'">
-                        <textarea class="px-2 border-0 shadow-none fw-light" placeholder="How to order your service" rows="3"></textarea>
+                        <textarea class="form-control px-2 border-0 shadow-none fw-light" placeholder="How to order your service" rows="3"></textarea>
                     </Tab>
                 </TabNav>
                 <div class="row w-75 mt-3 align-self-center">
