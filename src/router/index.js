@@ -34,10 +34,10 @@ const routes = [
 		component: () => import('../views/designer/HomeDesigner.vue')
 	},
 	{
-		path: '/portofoliodetails',
+		path: '/portofoliodetails/:titleporto',
 		name: 'PortofolioDetails',
 		component: () => import('../views/designer/PortoDetails.vue'),
-		props: true
+		// props: true
 	}
 ]
 

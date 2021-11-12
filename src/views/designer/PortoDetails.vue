@@ -4,23 +4,20 @@
             <div class="col h-100 d-flex flex-column justify-content-center text-start">
                 <p class="h4 fw-bold m-0">Portofolio Details</p>
                 <div class="porto-img bg-black my-3"></div>
-                <p class="h3 fw-bold">{{ portoName }}</p>
+                <p class="h3 fw-bold">{{ this.$route.params.titleporto }}</p>
                 <p class="h6">Rp500.000,00/item(approximately)</p>
             </div>
-
             <div class="col h-100 d-flex flex-column justify-content-center">
                 <p class="m-0 fs-6">Video intro 3-5 minutes full HD</p>
                 <p class="m-0 fs-6">Contact for more information</p>
                 <TabNav class="mt-4 w-75" :tabs="['Provision', 'How to Order']" :selected="selected" @selected="setSelected">
                     <Tab class="mt-1" :isSelected="selected === 'Provision'">
-                        <textarea class="form-control border-0 shadow-none fw-light" placeholder="Your description here" rows="3"></textarea>
+                        <textarea class="border-0 shadow-none fw-light" placeholder="Your description here" rows="3"></textarea>
                     </Tab>
-
                     <Tab class="mt-1" :isSelected="selected === 'How to Order'">
-                        <textarea class="form-control border-0 shadow-none fw-light" placeholder="How to order your service" rows="3"></textarea>
+                        <textarea class="border-0 shadow-none fw-light" placeholder="How to order your service" rows="3"></textarea>
                     </Tab>
                 </TabNav>
-
                 <div class="row w-75 mt-3 align-self-center">
                     <div class="col">
                         <p class="h3 bi bi-share-fill"></p>
@@ -57,12 +54,12 @@ export default {
             this.selected = tab;
         }
     },
-    props: {
-        portoName: {
-            type: String,
-            required: true
-        }
-    }
+    // props: {
+    //     portoName: {
+    //         type: String,
+    //         required: true
+    //     }
+    // }
 }
 </script>
 
@@ -78,5 +75,6 @@ export default {
 
     textarea {
         resize: none;
+		width: 500px;
     }
 </style>
