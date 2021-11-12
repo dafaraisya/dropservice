@@ -11,7 +11,7 @@
             <div class="card-img card-img-top bg-info rounded"></div>
             <div class="card-body">
               <p class="card-title fw-bold">Object Design</p>
-              <router-link to="/portofoliodetails">
+              <router-link :to="{ name: 'PortofolioDetails', params: { portoName: 'Object Design' }}">
                 <button type="button" class="btn btn-secondary mt-2">
                   More Info
                 </button>
@@ -24,9 +24,11 @@
             <div class="card-img card-img-top bg-info rounded"></div>
             <div class="card-body">
               <p class="card-title fw-bold">Video Intro</p>
-              <button type="button" class="btn btn-secondary mt-2">
-                More Info
-              </button>
+              <router-link :to="{ name: 'PortofolioDetails', params: { portoName: 'Video Intro' }}">
+                <button type="button" class="btn btn-secondary mt-2">
+                  More Info
+                </button>
+              </router-link>
             </div>
           </div>
         </div>
@@ -35,9 +37,11 @@
             <div class="card-img card-img-top bg-info rounded"></div>
             <div class="card-body">
               <p class="card-title fw-bold">Video Bumper</p>
-              <button type="button" class="btn btn-secondary mt-2">
-                More Info
-              </button>
+              <router-link :to="{ name: 'PortofolioDetails', params: { portoName: 'Video Bumper' }}">
+                <button type="button" class="btn btn-secondary mt-2">
+                  More Info
+                </button>
+              </router-link>
             </div>
           </div>
         </div>
@@ -46,9 +50,11 @@
             <div class="card-img card-img-top bg-info rounded"></div>
             <div class="card-body">
               <p class="card-title fw-bold">Video Animasi</p>
-              <button type="button" class="btn btn-secondary mt-2">
-                More Info
-              </button>
+              <router-link :to="{ name: 'PortofolioDetails', params: { portoName: 'Video Animasi' }}">
+                <button type="button" class="btn btn-secondary mt-2">
+                  More Info
+                </button>
+              </router-link>
             </div>
           </div>
         </div>

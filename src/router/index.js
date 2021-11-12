@@ -25,18 +25,19 @@ const routes = [
 	},
 	{
 		path: '/homeclient',
-		name: 'Home Client',
+		name: 'HomeClient',
 		component: () => import('../views/client/HomeClient.vue')
 	},
 	{
 		path: '/homedesigner',
-		name: 'Home Designer',
+		name: 'HomeDesigner',
 		component: () => import('../views/designer/HomeDesigner.vue')
 	},
 	{
 		path: '/portofoliodetails',
-		name: 'Portofolio Details',
-		component: () => import('../views/designer/PortoDetails.vue')
+		name: 'PortofolioDetails',
+		component: () => import('../views/designer/PortoDetails.vue'),
+		props: true
 	}
 ]
 

@@ -4,7 +4,7 @@
             <div class="col h-100 d-flex flex-column justify-content-center text-start">
                 <p class="h4 fw-bold m-0">Portofolio Details</p>
                 <div class="porto-img bg-black my-3"></div>
-                <p class="h3 fw-bold">Video Intro</p>
+                <p class="h3 fw-bold">{{ portoName }}</p>
                 <p class="h6">Rp500.000,00/item(approximately)</p>
             </div>
 
@@ -55,6 +55,12 @@ export default {
     methods: {
         setSelected(tab) {
             this.selected = tab;
+        }
+    },
+    props: {
+        portoName: {
+            type: String,
+            required: true
         }
     }
 }
