@@ -12,7 +12,7 @@
                 <p class="m-0 fs-6">Contact for more information</p>
                 <TabNav class="mt-4 w-75" :tabs="['Provision', 'How to Order']" :selected="selected" @selected="setSelected">
                     <Tab class="mt-1" :isSelected="selected === 'Provision'">
-                        <textarea class="px-2 border-0 shadow-none fw-light" placeholder="Your description here" rows="3"></textarea>
+                        <textarea class="form-control px-2 border-0 shadow-none fw-light" placeholder="Your description here" rows="3"></textarea>
                     </Tab>
                     <Tab class="mt-1" :isSelected="selected === 'How to Order'">
                         <textarea class="px-2 border-0 shadow-none fw-light" placeholder="How to order your service" rows="3"></textarea>
@@ -80,5 +80,11 @@ export default {
 
     textarea:focus {
         outline: none;
+    }
+
+    .form-control {
+        background: transparent !important;
+        border-radius: 0 !important;
+        height: 100% !important;
     }
 </style>

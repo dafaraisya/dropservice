@@ -1,6 +1,6 @@
 <template>
     <div class="align-self-center">
-        <ul class="nav nav-tabs nav-fill">
+        <ul class="nav nav-tabs nav-fill border-top">
             <li v-for="tab in tabs" :key="tab" class="nav-item">
                 <a class="nav-link text-black fw-bold" :class="{ active: tab === selected }" @click="setTab(tab)">
                     {{ tab }}
