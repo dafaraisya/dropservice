@@ -24,6 +24,7 @@ export default createStore({
 		profileName: null,
 		profileNumber: null,
 		profileRole: null,
+		profilePortofolio: null,
 		profileId: null,
 		profileInitials: null
 	},
@@ -38,6 +39,7 @@ export default createStore({
 			state.profileName = doc.data().name,
 			state.profileNumber = doc.data().phoneNumber,
 			state.profileRole = doc.data().role,
+			state.profilePortofolio = doc.data().portofolio,
 			state.profileId = doc.id;
 		},
 		setProfileInitials(state) {

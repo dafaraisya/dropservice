@@ -38,6 +38,16 @@ const routes = [
 		name: 'PortofolioDetails',
 		component: () => import('../views/designer/PortoDetails.vue'),
 		// props: true
+	},
+	{
+		path: '/chats',
+		name: 'Chats',
+		component: () => import('../views/chats/Chats.vue'),
+	},
+	{
+		path: '/chatroom',
+		name: 'Chat Room',
+		component: () => import('../views/chats/ChatRoom.vue'),
 	}
 ]
 
