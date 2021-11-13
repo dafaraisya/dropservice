@@ -1,7 +1,7 @@
 <template>
   <div class="vh-100">
     <div class="nav-bg bg-info">
-      <Navbar />
+      <Navbar/>
     </div>
     <div class="container mw-75 mt-4">
       <p class="h2 text-start">Your Portofolio</p>
@@ -88,6 +88,9 @@ export default {
 <style>
 .nav-bg {
   height: 40%;
+  background-image: url('../../assets/bg_designer.png');
+  background-position: bottom left;
+  background-size: cover;
 }
 
 .mw-75 {

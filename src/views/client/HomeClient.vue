@@ -92,6 +92,9 @@ export default {
 <style>
 .nav-bg {
   height: 40%;
+  background-image: url('../../assets/bg_client.png');
+  background-position: bottom left;
+  background-size: cover;
 }
 
 .mw-75 {
