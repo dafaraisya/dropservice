@@ -3,15 +3,15 @@
     <!-- <img alt="Vue logo" src="../assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/> -->
     <div class="container logo-home h-100">
-      <div class="row align-self-center h-100">
+      <div class="row align-self-center h-100" :class="isMobile() ? 'row-cols-1' : ''">
         <div class="col align-self-center">
-          <img height="350" class="logo-img" src="../assets/logo.png" alt="" />
+          <img class="logo-img" src="../assets/logo.png" alt="" />
         </div>
-        <div class="col signin-signup align-self-center">
+        <div class="col signin-signup" :class="isMobile() ? '' : 'align-self-center'">
           <div class="d-grid gap-2">
             <router-link to="/signin">
               <button
-                class="btn btn-dark rounded-pill btn-home fs-3"
+                class="w-75 btn btn-dark rounded-pill btn-home fs-3"
                 type="button"
               >
                 Sign In
@@ -19,7 +19,7 @@
             </router-link>
             <router-link to="/signup">
               <button
-                class="btn btn-light shadow rounded-pill btn-home mt-3 fs-3"
+                class="w-75 btn btn-light shadow rounded-pill btn-home mt-3 fs-3"
                 type="button"
               >
                 Sign Up
@@ -36,6 +36,24 @@
 <script>
 export default {
   name: "Home",
+  data() {
+    return {
+      windowWidth: 0,
+    }
+  },
+  created() {
+    window.addEventListener('resize', this.handleResize);
+    this.handleResize();
+  },
+  methods: {
+    handleResize() {
+        this.windowWidth = window.innerWidth;
+    },
+    isMobile() {
+        if(this.windowWidth <= 900) return true
+        else return false
+    }
+  },
   mounted() {
     if (localStorage.getItem("reloadedhome")) {
       // The page was just reloaded. Clear the value from local storage
@@ -54,5 +72,9 @@ export default {
 .btn-home {
   height: 60px;
   width: 600px;
+}
+
+.logo-img {
+  width: 60%;
 }
 </style>

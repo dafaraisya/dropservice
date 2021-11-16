@@ -1,13 +1,13 @@
 <template>
-  <div class="container">
-    <div class="row">
+  <div class="container vh-100">
+    <div class="row h-100" :class="isMobile() ? 'row-cols-1 mx-3' : ''">
       <div v-if="loading">
-        <Loading />
+        <Loading class="align-self-center"/>
       </div>
-      <div class="col">
-        <img height="350" class="logo-img" src="../assets/logo.png" alt="" />
+      <div class="col align-self-center">
+        <img class="logo-img" src="../assets/logo.png" alt="" />
       </div>
-      <div class="col">
+      <div class="col" :class="isMobile() ? '' : 'align-self-center'">
         <form class="form-signin">
           <div class="mb-3">
             <label for="emailId" class="form-label">Email Id</label>
@@ -30,7 +30,7 @@
           <div class="d-grid gap-2">
             <button
               @click.prevent="signIn"
-              class="btn btn-dark rounded-pill btn-signin fs-5"
+              class="btn btn-dark rounded-pill btn-signin fs-5 mx-5 mt-3"
               type="button"
             >
               Sign In
@@ -55,13 +55,25 @@ export default {
   },
   data() {
     return {
+      windowWidth:0,
       email: "",
       password: "",
       loading: null,
       role: null,
     };
   },
+  created() {
+      window.addEventListener('resize', this.handleResize);
+      this.handleResize();
+  },
   methods: {
+    handleResize() {
+      this.windowWidth = window.innerWidth;
+    },
+    isMobile() {
+      if(this.windowWidth <= 900) return true
+      else return false
+    },
     signIn() {
       this.loading = true;
       firebase
@@ -104,9 +116,10 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  margin-top: 200px;
+.logo-img {
+  width: 60%;
 }
+
 .form-label,
 .form-text {
   display: flex;
@@ -119,11 +132,5 @@ input {
 }
 input:focus {
   border-color: black;
-}
-.form-signin {
-  margin-top: 70px;
-}
-.btn-signin{
-	height: 60px;
 }
 </style>

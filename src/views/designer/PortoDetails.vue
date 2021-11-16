@@ -1,7 +1,7 @@
 <template>
-    <div class="container d-flex justify-content-center vh-100">
-        <div class="row w-100 h-100">
-            <div class="col h-100 d-flex flex-column justify-content-center text-start">
+    <div class="container d-flex justify-content-center">
+        <div class="row w-100 vh-100" :class="isMobile() ? 'row-cols-1' : ''">
+            <div class="col d-flex flex-column justify-top text-start" :class="isMobile() ? 'mb-5' : ''">
                 <p class="h4 fw-bold m-0">Portofolio Details</p>
                 <!-- <div class="porto-img bg-black mt-3 mb-2"></div> -->
                 <Carousel class="porto-img bg-black mt-3 mb-2 overflow-hidden" :assets="assets"/>
@@ -10,7 +10,7 @@
                 <input v-model="price" type="text" class="border-0 m-0 p-0 fs-6" placeholder="Price (Example : Rp500.000,00/item)">
                 <!-- <p class="h6">Rp500.000,00/item(approximately)</p> -->
             </div>
-            <div class="col h-100 d-flex flex-column justify-content-center">
+            <div class="col d-flex flex-column justify-bottom">
                 <!-- <p class="m-0 fs-6">Video intro 3-5 minutes full HD</p>
                 <p class="m-0 fs-6">Contact for more information</p> -->
                 <textarea v-model="description" class="px-5 align-self-center text-center lh-sm w-75 border-0" placeholder="Write a description of your &#10;service in this section" rows="2"></textarea>
@@ -40,6 +40,7 @@ export default {
     components: { TabNav, Tab, Carousel },
     data() {
         return {
+            windowWidth: 0,
             selected: 'Provision',
             description: '',
             portoTitle: '',
@@ -53,9 +54,20 @@ export default {
             ]  
         };
     },
+    created() {
+        window.addEventListener('resize', this.handleResize);
+        this.handleResize();
+    },
     methods: {
         setSelected(tab) {
             this.selected = tab;
+        },
+        handleResize() {
+            this.windowWidth = window.innerWidth;
+        },
+        isMobile() {
+            if(this.windowWidth <= 1000) return true
+            else return false
         }
     },
     // props: {
@@ -74,7 +86,11 @@ export default {
     }
 
     .porto-img {
-        height: 45%;
+        height: fit-content;
+    }
+
+    .justify-top, .justify-bottom {
+        justify-content: center;
     }
 
     textarea {
@@ -90,5 +106,15 @@ export default {
 
     input {
         outline: none;
+    }
+
+    @media only screen and (max-width: 1000px) {
+        .justify-top {
+            justify-content: end !important;
+        }
+
+        .justify-bottom {
+            justify-content: start !important;
+        }
     }
 </style>
