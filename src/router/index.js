@@ -34,10 +34,20 @@ const routes = [
 		component: () => import('../views/designer/HomeDesigner.vue')
 	},
 	{
-		path: '/portofoliodetails/:titleporto',
+		path: '/addportofolio',
+		name: 'AddPortofolio',
+		component: () => import('../views/designer/AddPorto.vue'),
+	},
+	{
+		path: '/portofoliodetails/:portoId',
 		name: 'PortofolioDetails',
 		component: () => import('../views/designer/PortoDetails.vue'),
 		// props: true
+	},
+	{
+		path: '/profile',
+		name: 'Profile',
+		component: () => import('../views/designer/Profile.vue'),
 	},
 	{
 		path: '/chats',

@@ -29,17 +29,17 @@
             <div class="role bg-black rounded-pill py-2 px-3 me-3 text-white">
                 {{ profileRole.toUpperCase() }}
             </div>
-            <div @click.prevent="signOut" id="circle" class="rounded-circle bg-black">
-				<div class="mt-1"></div>
-				<span class="initial-name mt-5">{{ this.$store.state.profileInitials }}</span>
+			<div id="circle" class="rounded-circle bg-black">
+				<router-link to="/profile" style="text-decoration: none; color: inherit;">
+					<div class="mt-1"></div>
+					<span class="initial-name mt-5">{{ this.$store.state.profileInitials }}</span>
+				</router-link>
             </div>
         </div>
     </nav>
 </template>
 
 <script>
-import firebase from "firebase/compat/app";
-import "firebase/compat/auth";
 export default {
     name: 'Navbar',
 	data() {
@@ -52,13 +52,6 @@ export default {
 			this.profileRole = this.$store.state.profileRole;
 		}, 1000);
 	},
-	methods: {
-		async signOut() {
-			await firebase.auth().signOut().then(() => {
-				this.$router.push('/');
-			})
-		}
-	}
 }
 </script>
 

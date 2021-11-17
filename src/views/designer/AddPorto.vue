@@ -2,11 +2,10 @@
   <div v-if="loading">
     <Loading />
   </div>
-  <div class="container d-flex justify-content-center">
-    <div class="row w-100 vh-100" :class="isMobile() ? 'row-cols-1' : ''">
+  <div class="container d-flex justify-content-center vh-100">
+    <div class="row w-100 h-100">
       <div
-        class="col d-flex flex-column justify-top text-start"
-        :class="isMobile() ? 'mb-5' : ''"
+        class="col h-100 d-flex flex-column justify-content-center text-start"
       >
         <div class="d-flex justify-content-between">
           <p class="h4 fw-bold m-0">Portofolio Details</p>
@@ -16,10 +15,13 @@
           </label>
         </div>
         <!-- <div class="porto-img bg-black mt-3 mb-2"></div> -->
-        <Carousel
+        <Carousel v-if="photosOrVideos.length > 0"
           class="porto-img bg-black mt-3 mb-2 overflow-hidden"
           :assets="photosOrVideos"
         />
+        <div v-else class="porto-img bg-black mt-3 mb-2 overflow-hidden position-relative">
+			<h6 class="text-white position-absolute top-50 start-50 translate-middle">Silahkan Upload Foto atau Video Anda</h6>
+		</div>
         <div class="d-flex">
           <div
             v-for="(photoOrVideo, index) in photosOrVideos"
@@ -37,28 +39,73 @@
             />
           </div>
         </div>
+        <div class="dropdown">
+          <button
+            class="btn border border-secondary dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            {{ category }}
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li>
+              <button
+                @click="chooseCategory('Web Design')"
+                class="dropdown-item"
+              >
+                Web Design
+              </button>
+            </li>
+            <li>
+              <button
+                @click="chooseCategory('Video Editing')"
+                class="dropdown-item"
+              >
+                Video Editing
+              </button>
+            </li>
+            <li>
+              <button
+                @click="chooseCategory('Animation')"
+                class="dropdown-item"
+              >
+                Animation
+              </button>
+            </li>
+            <li>
+              <button
+                @click="chooseCategory('App Development')"
+                class="dropdown-item"
+              >
+                App Development
+              </button>
+            </li>
+          </ul>
+        </div>
         <!-- <p class="h3 fw-bold">{{ this.$route.params.titleporto }}</p> -->
         <input
           v-model="portoTitle"
           type="text"
           class="border-0 m-0 p-0 fs-3 fw-bold"
-          placeholder="Your Portofolio"
+          placeholder="Your Portofolio Title Here..."
         />
         <input
           v-model="price"
           type="text"
           class="border-0 m-0 p-0 fs-6"
-          placeholder="Price (Example : Rp500.000,00/item)"
+          placeholder="Write Your Price Here... (Example : Rp500.000,00/item)"
         />
         <!-- <p class="h6">Rp500.000,00/item(approximately)</p> -->
       </div>
-      <div class="col d-flex flex-column justify-bottom">
+      <div class="col h-100 d-flex flex-column justify-content-center">
         <!-- <p class="m-0 fs-6">Video intro 3-5 minutes full HD</p>
                 <p class="m-0 fs-6">Contact for more information</p> -->
         <textarea
           v-model="description"
           class="px-5 align-self-center text-center lh-sm w-75 border-0"
-          placeholder="Write a description of your &#10;service in this section"
+          placeholder="Write a description of your &#10;service in this section..."
           rows="2"
         ></textarea>
         <TabNav
@@ -71,7 +118,7 @@
             <textarea
               v-model="provision"
               class="form-control px-2 border-0 shadow-none fw-light"
-              placeholder="Your provision here"
+              placeholder="Your provision here..."
               rows="3"
             ></textarea>
           </Tab>
@@ -79,14 +126,14 @@
             <textarea
               v-model="howToOrder"
               class="form-control px-2 border-0 shadow-none fw-light"
-              placeholder="How to order your service"
+              placeholder="How to order your service..."
               rows="3"
             ></textarea>
           </Tab>
         </TabNav>
         <div class="w-75 mt-3 align-self-center">
-          <button @click="updatePorto" class="btn btn-dark w-100">
-            Save Change
+          <button @click.prevent="addPorto" class="btn btn-dark w-100">
+            Submit
           </button>
         </div>
       </div>
@@ -105,13 +152,13 @@ import db from "../../firebase/firebase-init";
 import Loading from "../../components/Loading.vue";
 
 export default {
-  name: "Portofolio Details",
+  name: "Add Porto",
   components: { TabNav, Tab, Carousel, Loading },
   data() {
     return {
       loading: null,
-      windowWidth: 0,
       selected: "Provision",
+      category: "Category",
       description: "",
       photosOrVideos: [],
       portoTitle: "",
@@ -125,52 +172,12 @@ export default {
       ],
     };
   },
-  created() {
-    window.addEventListener("resize", this.handleResize);
-    this.handleResize();
-    db.collection("portofolio")
-      .doc(this.$route.params.portoId)
-      .get()
-      .then((snapshot) => {
-        this.description = snapshot.data().description;
-        this.photosOrVideos = snapshot.data().photosOrVideos;
-        this.portoTitle = snapshot.data().portoTitle;
-        this.price = snapshot.data().price;
-        this.provision = snapshot.data().provision;
-        this.howToOrder = snapshot.data().howToOrder;
-      });
-  },
   methods: {
+    chooseCategory(value) {
+      this.category = value;
+    },
     setSelected(tab) {
       this.selected = tab;
-    },
-    handleResize() {
-      this.windowWidth = window.innerWidth;
-    },
-    isMobile() {
-      if (this.windowWidth <= 1000) return true;
-      else return false;
-    },
-    async updatePorto() {
-      db.collection("portofolio")
-        .doc(this.$route.params.portoId)
-        .update({
-          description: this.description,
-          photosOrVideos: this.photosOrVideos,
-          portoTitle: this.portoTitle,
-          price: this.price,
-          provision: this.provision,
-          howToOrder: this.howToOrder,
-        })
-        .then(() => {
-          if (this.$store.state.profileRole == "designer") {
-            this.$router.push("/homedesigner");
-          }
-
-          if (this.$store.state.profileRole == "client") {
-            this.$router.push("/homeclient");
-          }
-        });
     },
     uploadFile(e) {
       this.loading = true;
@@ -184,6 +191,40 @@ export default {
           console.log(downloadURL);
         });
       });
+    },
+    async addPorto() {
+      if (
+        this.description !== "" &&
+        this.photosOrVideos !== "" &&
+        this.category !== "" &&
+        this.portoTitle !== "" &&
+        this.price !== "" &&
+        this.provision !== "" &&
+        this.howToOrder !== ""
+      ) {
+        const dataBase = db.collection("portofolio").doc();
+        await dataBase.set({
+          description: this.description,
+          photosOrVideos: this.photosOrVideos,
+          category: this.category,
+          portoTitle: this.portoTitle,
+          price: this.price,
+          provision: this.provision,
+          howToOrder: this.howToOrder,
+          designerId: this.$store.state.profileId,
+        });
+
+        if (this.$store.state.profileRole == "designer") {
+          this.$router.push("/homedesigner");
+        }
+
+        if (this.$store.state.profileRole == "client") {
+          this.$router.push("/homeclient");
+        }
+        return;
+      } else {
+        console.log("error");
+      }
     },
     deleteImage(photoOrVideo, index) {
       let file = firebase.storage().refFromURL(photoOrVideo);
@@ -215,12 +256,7 @@ export default {
 }
 
 .porto-img {
-  height: fit-content;
-}
-
-.justify-top,
-.justify-bottom {
-  justify-content: center;
+  height: 45%;
 }
 
 textarea {
@@ -248,7 +284,6 @@ input[type="file"] {
   padding: 6px 12px;
   cursor: pointer;
 }
-
 .delete-img {
   position: absolute;
   margin-left: 75px;
@@ -257,16 +292,6 @@ input[type="file"] {
 }
 
 .delete-img:hover {
-  cursor: pointer;
-}
-
-@media only screen and (max-width: 1000px) {
-  .justify-top {
-    justify-content: end !important;
-  }
-
-  .justify-bottom {
-    justify-content: start !important;
-  }
+	cursor: pointer;
 }
 </style>
