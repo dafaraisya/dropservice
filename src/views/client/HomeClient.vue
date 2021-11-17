@@ -3,61 +3,74 @@
     <div class="nav-bg bg-info">
       <Navbar />
     </div>
-    <div class="container mw-75 mt-4">
+    <div class="container mw-75 mt-5">
       <p class="h2 mb-1 fw-bold text-start">Design For You</p>
       <p class="h5 text-start">Type of Design is Here for Your Idea!!</p>
-      <div class="row mt-3">
-        <div class="col">
-          <div class="card h-100 pb-4 bg-secondary">
-            <div class="card-body">
-              <p class="card-title h3 text-white fw-bold">Web Design</p>
-            </div>
-            <div class="card-img card-img-top bg-info rounded"></div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card h-100 pb-4 bg-secondary">
-            <div class="card-body">
-              <p class="card-title h3 text-white fw-bold">Video Editing</p>
-            </div>
-            <div class="card-img card-img-top bg-info rounded"></div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card h-100 pb-4 bg-secondary">
-            <div class="card-body">
-              <p class="card-title h3 text-white fw-bold">Animation</p>
-            </div>
-            <div class="card-img card-img-top bg-info rounded"></div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card h-100 pb-4 bg-secondary">
-            <div class="card-body">
-              <p class="card-title h3 text-white fw-bold">App Development</p>
-            </div>
-            <div class="card-img card-img-top bg-info rounded"></div>
-          </div>
-        </div>
-      </div>
-      <!-- <div>
-				<button @click.prevent="createChat" type="button" class="btn btn-primary">Primary</button>
-			</div> -->
+      <vueper-slides
+        class="no-shadow  arrows-outside"
+        :bullets="false"
+        :visible-slides="4"
+        slide-multiple
+        :gap="3"
+        :slide-ratio="1 / 4"
+        :dragging-distance="70"
+        :breakpoints="breakpoints">
+        <vueper-slide v-for="(slide, i) in slidesCategory" :key="i">
+            <template #content>
+              <div class="h-100 w-100 d-flex flex-column justify-content-center align-items-center">
+                <div class="min-width">
+                  <p class="h-6 fw-bold align-self-start">{{ slide.title.toUpperCase() }}</p>
+                </div>
+                <div class="overflow-hidden card-img bg-info">
+                  <embed class="center" :src="slide.img" alt="category">
+                </div>
+              </div>
+            </template>
+        </vueper-slide>
+      </vueper-slides>
+    </div>
+
+    <div class="container mw-75 mt-4 pb-5">
+      <p class="h2 mb-1 fw-bold text-start">Designer You Might Need</p>
+      <p class="h5 text-start">Here are some designer based on your interest</p>
+      <vueper-slides
+        class="no-shadow  arrows-outside"
+        :bullets="false"
+        :visible-slides="4"
+        slide-multiple
+        :gap="3"
+        :slide-ratio="1 / 4"
+        :dragging-distance="70"
+        :breakpoints="breakpoints">
+        <vueper-slide v-for="(slide, i) in slidesDesigner" :key="i">
+            <template #content>
+              <div class="h-100 w-100 d-flex flex-column justify-content-center align-items-center">
+                <div class="min-width mb-3">
+                  <p class="h-6 fw-bold align-self-start m-0 p-0">{{ slide.name }}</p>
+                  <p class="h-6 category fw-light align-self-start m-0 p-0">{{ slide.category }}</p>
+                </div>
+                <div class="overflow-hidden card-img bg-info">
+                  <embed class="center" :src="slide.img" alt="category">
+                </div>
+              </div>
+            </template>
+        </vueper-slide>
+      </vueper-slides>
     </div>
   </div>
 </template>
 
 <script>
 import Navbar from "@/components/Navbar.vue";
+import { VueperSlides, VueperSlide } from 'vueperslides'
+import 'vueperslides/dist/vueperslides.css'
 // import firebase from "firebase/compat/app";
 // import "firebase/compat/auth";
 // import db from "../../firebase/firebase-init";
 
 export default {
   name: "Home Client",
-  components: {
-    Navbar,
-  },
+  components: { Navbar, VueperSlides, VueperSlide },
   mounted() {
     if (localStorage.getItem("reloadedhomeclient")) {
       // The page was just reloaded. Clear the value from local storage
@@ -69,23 +82,73 @@ export default {
       location.reload();
     }
   },
-  // methods: {
-  // 	async createChat() {
-  // 		const dataBase = db.collection("chats");
-  // 		await dataBase.add({
-  // 			clientId: firebase.auth().currentUser.uid,
-  // 			clientName: this.$store.state.profileName,
-  // 			designerId: '37e6BMysgaQkRV63aOx13yMsBbM2',
-  // 			designerName: 'Dafa Raisya'
-  // 		})
-  // 		.then(function(docRef) {
-  // 			console.log("Document written with ID: ", docRef.id);
-  // 		})
-  // 		.catch(function(error) {
-  // 			console.error("Error adding document: ", error);
-  // 		});
-  // 	}
-  // }
+  data() {
+    return {
+      breakpoints: {
+        // 670: {
+        //   slideRatio: 1/1.5,
+        //   visibleSlides: 2,
+        //   arrows: false,
+        // },
+        800: {
+          slideRatio: 1/1.6,
+          visibleSlides: 2,
+          arrows: false,
+        },
+        1430: {
+          slideRatio: 1/3.5
+        },
+        1180: {
+          slideRatio: 1/2.7,
+          visibleSlides: 3,
+        },
+        1000: {
+          slideRatio: 1/2,
+          visibleSlides: 2,
+        }
+      },
+      slidesCategory: [
+        {
+          title: 'Web Design',
+          img: 'https://picsum.photos/600/400.jpg',
+        },
+        {
+          title: 'Video Editing',
+          img: 'https://picsum.photos/600/400.jpg',
+        },
+        {
+          title: 'Animation',
+          img: 'https://picsum.photos/600/400.jpg',
+        },
+        {
+          title: 'App Development',
+          img: 'https://picsum.photos/600/400.jpg',
+        }
+      ],
+      slidesDesigner: [
+        {
+          name: 'Gabriel',
+          category: 'Content Creator Specialist',
+          img: 'https://picsum.photos/600/400.jpg',
+        },
+        {
+          name: 'Anselma',
+          category: 'Photo Editing Specialist',
+          img: 'https://picsum.photos/600/400.jpg',
+        },
+        {
+          name: 'Jeff Bezos',
+          category: 'App Development Specialist',
+          img: 'https://picsum.photos/600/400.jpg',
+        },
+        {
+          name: 'David',
+          category: 'Photo and Video Editing',
+          img: 'https://picsum.photos/600/400.jpg',
+        }
+      ]
+    }
+  },
 };
 </script>
 
@@ -101,9 +164,45 @@ export default {
   max-width: 75%;
 }
 
+.vueperslide {
+  margin: 3px;
+  padding: 10px 20px;
+  background: #737373;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  color: #fff;
+  border-radius: 15px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  text-align: start;
+}
+
+.min-width {
+  width: 100%;
+  height: 35%;
+}
+
 .card-img {
-  width: 120px;
+  width: 100%;
   height: 120px;
   align-self: center;
+  border-radius: 10px;
+}
+
+.category {
+  font-size: 1.1rem;
+}
+
+@media only screen and (max-width: 700px) {
+  .card-img {
+    height: 50%;
+  }
+
+  .vueperslide {
+    font-size: 0.8rem;
+  }
+
+  .category {
+    font-size: 0.7rem;
+  }
 }
 </style>
