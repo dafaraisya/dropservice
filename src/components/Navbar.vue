@@ -30,7 +30,11 @@
                 {{ profileRole.toUpperCase() }}
             </div>
 			<div id="circle" class="rounded-circle bg-black">
-				<router-link to="/profile" style="text-decoration: none; color: inherit;">
+				<router-link v-if="this.profileRole == 'designer'" to="/profiledesigner" style="text-decoration: none; color: inherit;">
+					<div class="mt-1"></div>
+					<span class="initial-name mt-5">{{ this.$store.state.profileInitials }}</span>
+				</router-link>
+				<router-link v-if="this.profileRole == 'client'" to="/profileclient" style="text-decoration: none; color: inherit;">
 					<div class="mt-1"></div>
 					<span class="initial-name mt-5">{{ this.$store.state.profileInitials }}</span>
 				</router-link>

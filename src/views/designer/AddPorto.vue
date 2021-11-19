@@ -212,6 +212,7 @@ export default {
           provision: this.provision,
           howToOrder: this.howToOrder,
           designerId: this.$store.state.profileId,
+          designerName: this.$store.state.profileName,
         });
 
         if (this.$store.state.profileRole == "designer") {

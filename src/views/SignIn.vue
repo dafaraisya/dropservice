@@ -86,12 +86,10 @@ export default {
             .then((doc) => {
               this.role = doc.data().role;
               if (this.role === "designer") {
-                console.log("ini designer");
                 this.$router.push("/homedesigner");
               }
 
               if (this.role === "client") {
-                console.log("ini client");
                 this.$router.push("/homeclient");
               }
             });

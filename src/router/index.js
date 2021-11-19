@@ -24,40 +24,76 @@ const routes = [
 		component: () => import('../views/ChooseRole.vue')
 	},
 	{
-		path: '/homeclient',
-		name: 'HomeClient',
-		component: () => import('../views/client/HomeClient.vue')
-	},
-	{
 		path: '/homedesigner',
 		name: 'HomeDesigner',
-		component: () => import('../views/designer/HomeDesigner.vue')
+		component: () => import('../views/designer/HomeDesigner.vue'),
+		meta: { requiresAuth: true },
 	},
 	{
 		path: '/addportofolio',
 		name: 'AddPortofolio',
 		component: () => import('../views/designer/AddPorto.vue'),
+		meta: { requiresAuth: true },
 	},
 	{
 		path: '/portofoliodetails/:portoId',
 		name: 'PortofolioDetails',
 		component: () => import('../views/designer/PortoDetails.vue'),
-		// props: true
+		meta: { requiresAuth: true },
 	},
 	{
-		path: '/profile',
-		name: 'Profile',
-		component: () => import('../views/designer/Profile.vue'),
+		path: '/profiledesigner',
+		name: 'ProfileDesigner',
+		component: () => import('../views/designer/ProfileDesigner.vue'),
+		meta: { requiresAuth: true },
+	},
+	{
+		path: '/client',
+		name: 'MainClient',
+		component: () => import('../views/client/MainClient.vue'),
+		meta: { requiresAuth: true },
+	},
+	{
+		path: '/homeclient',
+		name: 'HomeClient',
+		component: () => import('../views/client/HomeClient.vue'),
+		meta: { requiresAuth: true },
+	},
+	{
+		path: '/designerportofolios/:designerId',
+		name: 'DesignerPortofolios',
+		component: () => import('../views/client/DesignerPortofolios.vue'),
+		meta: { requiresAuth: true },
+	},
+	{
+		path: '/designerportofolios/:designerId/:portoId',
+		name: 'DesignerPortofolioDetails',
+		component: () => import('../views/client/DesignerPortoDetails.vue'),
+		meta: { requiresAuth: true },
+	},
+	{
+		path: '/designerportofolioscategory/:category',
+		name: 'DesignerPortofoliosCategory',
+		component: () => import('../views/client/DesignerPortoCategory.vue'),
+		meta: { requiresAuth: true },
+	},
+	{
+		path: '/profileclient',
+		name: 'ProfileClient',
+		component: () => import('../views/client/ProfileClient.vue'),
+		meta: { requiresAuth: true },
 	},
 	{
 		path: '/chats',
 		name: 'Chats',
 		component: () => import('../views/chats/Chats.vue'),
+		meta: { requiresAuth: true },
 	},
 	{
-		path: '/chatroom',
+		path: '/chatroom/:chatname/:docId',
 		name: 'Chat Room',
 		component: () => import('../views/chats/ChatRoom.vue'),
+		meta: { requiresAuth: true },
 	}
 ]
 
@@ -67,12 +103,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-	if (to.fullPath === '/homeclient') {
-		if (!store.state.user) {
-			next('/signin');
-		}
-	}
-	if (to.fullPath === '/homedesigner') {
+	if (to.matched.some(record => record.meta.requiresAuth)) {
 		if (!store.state.user) {
 			next('/signin');
 		}

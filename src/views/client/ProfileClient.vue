@@ -38,6 +38,14 @@
                 type="button"
               />
             </router-link>
+            <router-link to="/chats">
+              <input
+                style="text-align: left; padding-left: 6px"
+                class="btn btn-profile-option fs-4 border-bottom text-left"
+                value="Chat"
+                type="button"
+              />
+            </router-link>
             <router-link to="/description-specialization">
               <input
                 style="text-align: left; padding-left: 6px"
