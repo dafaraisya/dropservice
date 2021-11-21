@@ -137,14 +137,22 @@ export default {
   methods: {
     sendMessage() {
       const today = new Date();
+      let seconds = "";
+      if (today.getSeconds() < 10) {
+        console.log("0" + today.getSeconds().toString());
+        seconds = "0" + today.getSeconds().toString();
+      }
+      if (today.getSeconds() >= 10) {
+        console.log(today.getSeconds().toString());
+        seconds = today.getSeconds().toString();
+      }
       const date =
         today.getFullYear() +
         "-" +
         (today.getMonth() + 1) +
         "-" +
         today.getDate();
-      const time =
-        today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      const time = today.getHours() + ":" + today.getMinutes() + ":" + seconds;
       const dateTime = date + " " + time;
       db.collection("chats/" + this.$route.params.docId + "/messages")
         .doc()
