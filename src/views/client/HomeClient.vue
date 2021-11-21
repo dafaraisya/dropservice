@@ -3,6 +3,7 @@
     <div class="nav-bg bg-info">
       <Navbar />
     </div>
+    <BottomNavbar />
     <div class="container mw-75 mt-5">
       <p class="h2 mb-1 fw-bold text-start">Design For You</p>
       <p class="h5 text-start">Type of Design is Here for Your Idea!!</p>
@@ -97,12 +98,14 @@
         </vueper-slide>
       </vueper-slides>
     </div>
+    <br><br>
   </div>
 </template>
 
 <script>
 import Navbar from "@/components/Navbar.vue";
 import { VueperSlides, VueperSlide } from "vueperslides";
+import BottomNavbar from "@/components/BottomNavbar.vue";
 import "vueperslides/dist/vueperslides.css";
 // import firebase from "firebase/compat/app";
 // import "firebase/compat/auth";
@@ -110,7 +113,7 @@ import db from "../../firebase/firebase-init";
 
 export default {
   name: "Home Client",
-  components: { Navbar, VueperSlides, VueperSlide },
+  components: { Navbar, VueperSlides, VueperSlide, BottomNavbar },
   mounted() {
     if (localStorage.getItem("reloadedhomeclient")) {
       // The page was just reloaded. Clear the value from local storage

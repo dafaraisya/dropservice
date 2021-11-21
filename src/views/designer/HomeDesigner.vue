@@ -4,21 +4,15 @@
       <Navbar />
     </div>
     <BottomNavbar />
-    <div class="container mw-75 mt-4">
+    <div class="container mw-75 mt-4">  
       <div class="h2 text-start d-flex justify-content-between">
         <h2>Your Portofolio</h2>
         <router-link to="/addportofolio">
           <button type="button" class="btn btn-outline-dark rounded-pill">
-            Tambah Portofolio
+            Add Portofolio
           </button>
         </router-link>
       </div>
-      <!-- <p class="">Your Portofolio</p>
-      <router-link to="/addportofolio">
-        <button type="button" class="btn btn-outline-dark rounded-pill">
-          Tambah Portofolio
-        </button>
-      </router-link> -->
       <vueper-slides
         class="no-shadow arrows-outside"
         :bullets="false"
@@ -56,61 +50,8 @@
           </template>
         </vueper-slide>
       </vueper-slides>
-      <!-- <div class="row mt-3">
-        <div class="col">
-          <div class="card pt-4 pb-2">
-            <div class="card-img card-img-top bg-info rounded"></div>
-            <div class="card-body">
-              <p class="card-title fw-bold">Object Design</p>
-              <router-link to="/portofoliodetails/Object Design">
-                <button type="button" class="btn btn-secondary mt-2">
-                  More Info
-                </button>
-              </router-link>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card pt-4 pb-2">
-            <div class="card-img card-img-top bg-info rounded"></div>
-            <div class="card-body">
-              <p class="card-title fw-bold">Video Intro</p>
-              <router-link to="/portofoliodetails/Video Intro">
-                <button type="button" class="btn btn-secondary mt-2">
-                  More Info
-                </button>
-              </router-link>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card pt-4 pb-2">
-            <div class="card-img card-img-top bg-info rounded"></div>
-            <div class="card-body">
-              <p class="card-title fw-bold">Video Bumper</p>
-              <router-link to="/portofoliodetails/Video Bumper">
-                <button type="button" class="btn btn-secondary mt-2">
-                  More Info
-                </button>
-              </router-link>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card pt-4 pb-2">
-            <div class="card-img card-img-top bg-info rounded"></div>
-            <div class="card-body">
-              <p class="card-title fw-bold">Video Animasi</p>
-              <router-link to="/portofoliodetails/Video Animasi">
-                <button type="button" class="btn btn-secondary mt-2">
-                  More Info
-                </button>
-              </router-link>
-            </div>
-          </div>
-        </div>
-      </div> -->
     </div>
+     <br><br><br><br>
   </div>
 </template>
 
