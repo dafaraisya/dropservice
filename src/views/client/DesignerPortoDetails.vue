@@ -149,17 +149,16 @@ export default {
       else return false;
     },
     async createChat() {
-      const dataBase = db.collection("chats");
+      const dataBase = db.collection("chats").doc(this.$store.state.profileId+this.designerId);
       await dataBase
-        .add({
+        .set({
           clientId: firebase.auth().currentUser.uid,
           clientName: this.$store.state.profileName,
           designerId: this.designerId,
           designerName: this.designerName,
         })
-        .then((docRef) => {
-          console.log("Document written with ID: ", docRef.id);
-          this.$router.push('/chatroom/'+this.designerName+'/'+docRef.id);
+        .then(() => {
+          this.$router.push('/chatroom/'+this.designerName+'/'+this.$store.state.profileId+this.designerId);
         })
         .catch((error) => {
           console.error("Error adding document: ", error);

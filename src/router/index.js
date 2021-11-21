@@ -94,6 +94,18 @@ const routes = [
 		name: 'Chat Room',
 		component: () => import('../views/chats/ChatRoom.vue'),
 		meta: { requiresAuth: true },
+	},
+	{
+		path: '/transactions/:userId',
+		name: 'Transactions',
+		component: () => import('../views/transactions/AllTransactions.vue'),
+		meta: { requiresAuth: true },
+	},
+	{
+		path: '/detailstransaction/:docId',
+		name: 'Details Transaction',
+		component: () => import('../views/transactions/DetailsTransaction.vue'),
+		meta: { requiresAuth: true },
 	}
 ]
 
