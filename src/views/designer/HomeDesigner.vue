@@ -8,8 +8,9 @@
       <div class="h2 text-start d-flex justify-content-between">
         <h2>Your Portofolio</h2>
         <router-link to="/addportofolio">
-          <button type="button" class="btn btn-outline-dark rounded-pill">
-            Add Portofolio
+          <button type="button" class="btn btn-outline-dark rounded-pill py-0 px-3">
+            <span class="bi bi-plus fs-5 align-middle"/>
+            Add
           </button>
         </router-link>
       </div>

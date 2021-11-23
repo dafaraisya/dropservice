@@ -1,59 +1,49 @@
 <template>
-  <div class="profile vh-100">
-    <div class="container h-100">
-      <div class="back-home">
-        <router-link
-          v-if="this.$store.state.profileRole == 'designer'"
-          to="/homedesigner"
+  <div class="container vh-100">
+    <div class="row h-100">
+      <!-- Profile -->
+      <div class="col d-none d-lg-flex flex-column justify-content-center align-items-center">
+        <div
+          class="
+            profile-shape
+            d-flex
+            justify-content-center
+            align-items-center
+            rounded-circle
+            bg-black
+          "
         >
-          <button style="padding: 0; border: none; background: none">
-            <p class="h3 bi bi-arrow-left-circle-fill"> Back To Home</p>
-          </button>
-        </router-link>
-        <router-link
-          v-if="this.$store.state.profileRole == 'client'"
-          to="/homeclient"
-        >
-          <button style="padding: 0; border: none; background: none">
-            <p class="h3 bi bi-arrow-left-circle-fill"> Back To Home</p>
-          </button>
-        </router-link>
-      </div>
-      <div class="row h-100">
-        <div class="col align-self-center">
-          <div class="row">
-            <div id="circle" class="rounded-circle bg-black">
-              <span class="initial-name mt-5">
-                <p class="initial-name">
-                  {{ this.$store.state.profileInitials }}
-                </p>
-              </span>
-            </div>
-            <div id="profile-name">
-              <p class="fs-1 fw-bold">{{ this.$store.state.profileName }}</p>
-              <p
-                v-if="this.$store.state.profileRole == 'designer'"
-                class="fs-3 bold"
-              >
-                Designer
-              </p>
-              <p
-                v-if="this.$store.state.profileRole == 'client'"
-                class="fs-3 bold"
-              >
-                Client
-              </p>
-            </div>
-          </div>
+          <p class="m-0 display-1">{{ this.$store.state.profileInitials }}</p>
         </div>
-        <div class="col-12 col-lg-7 col-xl-6" style="margin-top: 100px">
-          <!-- list chat content -->
-          <div class="col-12 col-lg-5 col-xl-12 list-chat-messages">
-            <div class="py-2 px-4 border-bottom d-none d-lg-block">
-              <div class="d-flex align-items-center py-1">
-                <div class="flex-grow-1">
-                  <strong>All Messages</strong>
-                </div>
+        <div class="">
+          <p class="fs-1 fw-bold m-0 mt-2">
+            {{ this.$store.state.profileName }}
+          </p>
+          <p
+            v-if="this.$store.state.profileRole == 'designer'"
+            class="fs-3 m-0 lh-1"
+          >
+            Designer
+          </p>
+          <p v-if="this.$store.state.profileRole == 'client'" class="fs-3">
+            Client
+          </p>
+        </div>
+      </div>
+      <!-- Chats List -->
+      <div class="col my-2 d-flex flex-column justify-content-center align-items-center">
+        <!-- list chat content -->
+          <div class="col w-100 list-chat-messages">
+            <div class="py-2 px-4 border-bottom">
+              <div class="d-flex flex-row align-items-center py-1">
+                <!-- Back Button -->
+                <router-link v-if="this.$store.state.profileRole == 'designer'" class="text-black" to="/homedesigner">
+                  <p class="fs-4 m-0 p-0 lh-base bi bi-arrow-left-circle-fill me-3"></p>
+                </router-link>
+                <router-link v-if="this.$store.state.profileRole == 'client'" class="text-black" to="/homeclient">
+                  <p class="fs-4 m-0 p-0 lh-base bi bi-arrow-left-circle-fill me-3"></p>
+                </router-link>
+                <p class="m-0 p-0 lh-base">All Messages</p>
               </div>
             </div>
             <div v-for="(chat, i) in chats" :key="i">
@@ -104,7 +94,6 @@
               </router-link>
             </div>
           </div>
-        </div>
       </div>
     </div>
   </div>
@@ -168,17 +157,12 @@ export default {
 };
 </script>
 <style scoped>
-#circle {
-  height: 150px;
-  width: 150px;
+.profile-shape {
+  height: 9em;
+  width: 9em;
+  color: #fff;
 }
-#profile-name {
-  width: 300px;
-}
-.initial-name {
-  font-size: 100px;
-  color: white;
-}
+
 .btn-profile-option {
   width: 600px;
 }
@@ -186,33 +170,9 @@ export default {
 .list-chat-messages {
   display: flex;
   flex-direction: column;
-  height: 550px;
   overflow-y: scroll;
-  border-left: 1px solid grey;
 }
 
-.chat-message-left,
-.chat-message-right {
-  display: flex;
-  flex-shrink: 0;
-}
-
-.chat-message-left {
-  margin-right: auto;
-  margin-bottom: 10px;
-  background-color: #737373;
-  color: white;
-  border-radius: 20px 20px;
-}
-
-.chat-message-right {
-  flex-direction: row-reverse;
-  margin-left: auto;
-  margin-bottom: 10px;
-  background-color: #373636;
-  color: white;
-  border-radius: 20px 20px;
-}
 .back-home {
   position: absolute;
   top: 100px;

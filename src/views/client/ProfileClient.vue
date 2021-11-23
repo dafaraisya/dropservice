@@ -2,7 +2,7 @@
   <div class="container vh-100">
     <div class="row h-100">
       <div
-        class="col d-flex flex-column justify-content-center align-items-center"
+        class="col my-3 d-flex flex-column justify-content-center align-items-center"
       >
         <div
           class="
