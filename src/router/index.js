@@ -106,6 +106,10 @@ const routes = [
 		name: 'Details Transaction',
 		component: () => import('../views/transactions/DetailsTransaction.vue'),
 		meta: { requiresAuth: true },
+	},
+	{
+		path: '/notification',
+		component: () => import('../views/Notification.vue')
 	}
 ]
 

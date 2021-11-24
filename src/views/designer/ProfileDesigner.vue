@@ -36,21 +36,28 @@
       >
         <router-link to="/homedesigner" class="w-100 my-1">
           <input
-            class="btn fs-4 border-bottom text-start w-100"
+            class="btn fs-5 border-bottom text-start w-100"
             value="Portofolio"
             type="button"
           />
         </router-link>
         <router-link to="/chats" class="w-100 my-1">
           <input
-            class="btn fs-4 border-bottom text-start w-100"
+            class="btn fs-5 border-bottom text-start w-100"
             value="Chat"
+            type="button"
+          />
+        </router-link>
+        <router-link to="/notification" class="w-100 my-1">
+          <input
+            class="btn fs-5 border-bottom text-start w-100"
+            value="Notification"
             type="button"
           />
         </router-link>
         <router-link to="/description-specialization" class="w-100 my-1">
           <input
-            class="btn fs-4 border-bottom text-start w-100"
+            class="btn fs-5 border-bottom text-start w-100"
             value="Description & Specialization"
             type="button"
           />
@@ -58,42 +65,42 @@
         <router-link :to="'/transactions/' + this.$store.state.profileId" class="w-100 my-1">
           <input
             style="text-align: left; padding-left: 6px"
-            class="btn fs-4 border-bottom text-start w-100"
+            class="btn fs-5 border-bottom text-start w-100"
             value="Transaction History"
             type="button"
           />
         </router-link>
         <router-link to="/designer-cost" class="w-100 my-1">
           <input
-            class="btn fs-4 border-bottom text-start w-100"
+            class="btn fs-5 border-bottom text-start w-100"
             value="Designer Cost"
             type="button"
           />
         </router-link>
         <router-link to="/last-seen" class="w-100 my-1">
           <input
-            class="btn fs-4 border-bottom text-start w-100"
+            class="btn fs-5 border-bottom text-start w-100"
             value="Last Seen"
             type="button"
           />
         </router-link>
         <router-link to="/account-settings" class="w-100 my-1">
           <input
-            class="btn fs-4 border-bottom text-start w-100"
+            class="btn fs-5 border-bottom text-start w-100"
             value="Account Settings"
             type="button"
           />
         </router-link>
         <router-link to="/privacy-security" class="w-100 my-1">
           <input
-            class="btn fs-4 border-bottom text-start w-100"
+            class="btn fs-5 border-bottom text-start w-100"
             value="Privacy and Security"
             type="button"
           />
         </router-link>
         <router-link to="/help" class="w-100 my-1">
           <input
-            class="btn fs-4 border-bottom text-start w-100"
+            class="btn fs-5 border-bottom text-start w-100"
             value="Help"
             type="button"
           />
@@ -101,7 +108,7 @@
         <router-link to="/profile" class="w-100 my-1">
           <input
             @click="signOut"
-            class="btn fs-4 border-bottom text-start w-100"
+            class="btn fs-5 border-bottom text-start w-100"
             value="Sign Out"
             type="button"
           />

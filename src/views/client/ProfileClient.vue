@@ -36,21 +36,28 @@
       >
         <router-link to="/homedesigner" class="w-100 my-1">
           <input
-            class="btn fs-4 border-bottom text-start w-100"
+            class="btn fs-5 border-bottom text-start w-100"
             value="Portofolio"
             type="button"
           />
         </router-link>
         <router-link to="/chats" class="w-100 my-1">
           <input
-            class="btn fs-4 border-bottom text-start w-100"
+            class="btn fs-5 border-bottom text-start w-100"
             value="Chat"
+            type="button"
+          />
+        </router-link>
+        <router-link to="/notification" class="w-100 my-1">
+          <input
+            class="btn fs-5 border-bottom text-start w-100"
+            value="Notification"
             type="button"
           />
         </router-link>
         <router-link to="/description-specialization" class="w-100 my-1">
           <input
-            class="btn fs-4 border-bottom text-start w-100"
+            class="btn fs-5 border-bottom text-start w-100"
             value="Description & Specialization"
             type="button"
           />
@@ -58,42 +65,42 @@
         <router-link :to="'/transactions/' + this.$store.state.profileId" class="w-100 my-1">
           <input
             style="text-align: left; padding-left: 6px"
-            class="btn fs-4 border-bottom text-start w-100"
+            class="btn fs-5 border-bottom text-start w-100"
             value="Transaction History"
             type="button"
           />
         </router-link>
         <router-link to="/designer-cost" class="w-100 my-1">
           <input
-            class="btn fs-4 border-bottom text-start w-100"
+            class="btn fs-5 border-bottom text-start w-100"
             value="Designer Cost"
             type="button"
           />
         </router-link>
         <router-link to="/last-seen" class="w-100 my-1">
           <input
-            class="btn fs-4 border-bottom text-start w-100"
+            class="btn fs-5 border-bottom text-start w-100"
             value="Last Seen"
             type="button"
           />
         </router-link>
         <router-link to="/account-settings" class="w-100 my-1">
           <input
-            class="btn fs-4 border-bottom text-start w-100"
+            class="btn fs-5 border-bottom text-start w-100"
             value="Account Settings"
             type="button"
           />
         </router-link>
         <router-link to="/privacy-security" class="w-100 my-1">
           <input
-            class="btn fs-4 border-bottom text-start w-100"
+            class="btn fs-5 border-bottom text-start w-100"
             value="Privacy and Security"
             type="button"
           />
         </router-link>
         <router-link to="/help" class="w-100 my-1">
           <input
-            class="btn fs-4 border-bottom text-start w-100"
+            class="btn fs-5 border-bottom text-start w-100"
             value="Help"
             type="button"
           />
@@ -101,7 +108,7 @@
         <router-link to="/profile" class="w-100 my-1">
           <input
             @click="signOut"
-            class="btn fs-4 border-bottom text-start w-100"
+            class="btn fs-5 border-bottom text-start w-100"
             value="Sign Out"
             type="button"
           />
@@ -143,7 +150,7 @@
             <router-link to="/homedesigner">
               <input
                 style="text-align: left; padding-left: 6px"
-                class="btn fs-4 border-bottom text-start"
+                class="btn fs-5 border-bottom text-start"
                 value="Portofolio"
                 type="button"
               />
@@ -151,7 +158,7 @@
             <router-link to="/chats">
               <input
                 style="text-align: left; padding-left: 6px"
-                class="btn fs-4 border-bottom text-start"
+                class="btn fs-5 border-bottom text-start"
                 value="Chat"
                 type="button"
               />
@@ -159,7 +166,7 @@
             <router-link to="/description-specialization">
               <input
                 style="text-align: left; padding-left: 6px"
-                class="btn fs-4 border-bottom text-start"
+                class="btn fs-5 border-bottom text-start"
                 value="Description & Specialization"
                 type="button"
               />
@@ -167,7 +174,7 @@
             <router-link to="/designer-cost">
               <input
                 style="text-align: left; padding-left: 6px"
-                class="btn fs-4 border-bottom text-start"
+                class="btn fs-5 border-bottom text-start"
                 value="Designer Cost"
                 type="button"
               />
@@ -175,7 +182,7 @@
             <router-link to="/last-seen">
               <input
                 style="text-align: left; padding-left: 6px"
-                class="btn fs-4 border-bottom text-start"
+                class="btn fs-5 border-bottom text-start"
                 value="Last Seen"
                 type="button"
               />
@@ -183,7 +190,7 @@
             <router-link to="/account-settings">
               <input
                 style="text-align: left; padding-left: 6px"
-                class="btn fs-4 border-bottom text-start"
+                class="btn fs-5 border-bottom text-start"
                 value="Account Settings"
                 type="button"
               />
@@ -191,7 +198,7 @@
             <router-link to="/privacy-security">
               <input
                 style="text-align: left; padding-left: 6px"
-                class="btn fs-4 border-bottom text-start"
+                class="btn fs-5 border-bottom text-start"
                 value="Privacy and Security"
                 type="button"
               />
@@ -199,7 +206,7 @@
             <router-link to="/help">
               <input
                 style="text-align: left; padding-left: 6px"
-                class="btn fs-4 border-bottom text-start"
+                class="btn fs-5 border-bottom text-start"
                 value="Help"
                 type="button"
               />
@@ -208,7 +215,7 @@
               <input
                 @click="signOut"
                 style="text-align: left; padding-left: 6px"
-                class="btn fs-4 border-bottom text-start"
+                class="btn fs-5 border-bottom text-start"
                 value="Sign Out"
                 type="button"
               />
