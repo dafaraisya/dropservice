@@ -4,12 +4,21 @@
       <div class="row align-self-center h-100">
         <div class="col align-self-center">
           <div class="row">
-            <div id="circle" class="rounded-circle bg-black">
-              <span class="initial-name mt-5">
+            <div id="circle" class="rounded-circle">
+              <div class="profile-picture">
+                <img
+                  :src="this.$store.state.profilePicture"
+                  width="150"
+                  height="150"
+                  class="rounded-pill"
+                  alt="..."
+                />
+              </div>
+              <!-- <span class="initial-name mt-5">
                 <p class="initial-name">
                   {{ this.$store.state.profileInitials }}
                 </p>
-              </span>
+              </span> -->
             </div>
             <div id="profile-name">
               <p class="fs-1 fw-bold">{{ this.$store.state.profileName }}</p>
@@ -30,9 +39,7 @@
         </div>
         <div class="col list-option align-self-center">
           <div class="d-grid gap-2">
-            <div style="color: black; font-size: 20px">
-              Details Transaction
-            </div>
+            <div style="color: black; font-size: 20px">Details Transaction</div>
             <div class="transaction-section">
               <button
                 class="btn-transaction-section"
@@ -54,11 +61,7 @@
                 id="clientDetails"
                 style="text-align: left; padding-left: 10px; margin-top: 5px"
               >
-                <div>
-                  Regita<br />
-                  081129394375982<br />
-                  Regita@gmail.com<br />
-                </div>
+                <div>{{ clientName }}<br /></div>
               </div>
             </div>
             <div class="transaction-section">
@@ -84,8 +87,8 @@
               >
                 <div>
                   Bank Transfer<br />
-                  a/n Ari setiawan<br />
-                  no rek : 0912371239<br />
+                  a/n {{ atasNamaRekening }}<br />
+                  no rek : {{ noRekening }}<br />
                 </div>
               </div>
             </div>
@@ -110,7 +113,7 @@
                 id="total"
                 style="text-align: left; padding-left: 10px; margin-top: 5px"
               >
-                <div>Rp. 500.000,00<br /></div>
+                <div>Rp. {{ price }}<br /></div>
               </div>
             </div>
             <div class="transaction-section">
@@ -139,15 +142,15 @@
                     <tbody>
                       <tr>
                         <th scope="row">Category</th>
-                        <td>Web Design</td>
+                        <td>{{ category }}</td>
                       </tr>
                       <tr>
                         <th scope="row">Title Project</th>
-                        <td>Web design e-commerce</td>
+                        <td>{{ portoTitle }}</td>
                       </tr>
                       <tr>
-                        <th scope="row">Notes</th>
-                        <td colspan="2">Deadline 20 september</td>
+                        <th scope="row">Description</th>
+                        <td colspan="2">{{ description }}</td>
                       </tr>
                     </tbody>
                   </table>
@@ -164,9 +167,56 @@
 <script>
 // import firebase from "firebase/compat/app";
 // import "firebase/compat/auth";
+import db from "../../firebase/firebase-init";
 export default {
   name: "Details Transaction",
-  methods: {},
+  data() {
+    return {
+      description: "",
+      photosOrVideos: "",
+      category: "",
+      portoTitle: "",
+      price: "",
+      provision: "",
+      howToOrder: "",
+      designerId: "",
+      designerName: "",
+      clientId: "",
+      clientName: "",
+      noRekening: "",
+      atasNamaRekening: "",
+    };
+  },
+  methods: {
+    getNoRek() {
+      db.collection("users")
+        .doc(this.designerId)
+        .get()
+        .then((snapshot) => {
+          this.noRekening = snapshot.data().noRekening;
+          this.atasNamaRekening = snapshot.data().atasNamaRekening;
+        });
+    },
+  },
+  created() {
+    db.collection("transactions")
+      .doc(this.$route.params.docId)
+      .get()
+      .then((snapshot) => {
+        this.description = snapshot.data().description;
+        this.photosOrVideos = snapshot.data().photosOrVideos;
+        this.category = snapshot.data().category;
+        this.portoTitle = snapshot.data().portoTitle;
+        this.price = snapshot.data().price;
+        this.provision = snapshot.data().provision;
+        this.howToOrder = snapshot.data().howToOrder;
+        this.designerId = snapshot.data().designerId;
+        this.designerName = snapshot.data().designerName;
+        this.clientId = snapshot.data().clientId;
+        this.clientName = snapshot.data().clientName;
+        this.getNoRek();
+      });
+  },
 };
 </script>
 <style scoped>
@@ -176,6 +226,9 @@ export default {
 }
 #profile-name {
   width: 300px;
+}
+.profile-picture img {
+  object-fit: cover;
 }
 .initial-name {
   font-size: 100px;

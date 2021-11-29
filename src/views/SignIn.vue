@@ -2,13 +2,16 @@
   <div class="container vh-100">
     <div class="row h-100" :class="isMobile() ? 'row-cols-1 mx-3' : ''">
       <div v-if="loading">
-        <Loading class="align-self-center"/>
+        <Loading class="align-self-center" />
       </div>
       <div class="col align-self-center">
         <img class="logo-img" src="../assets/logo.png" alt="" />
       </div>
       <div class="col" :class="isMobile() ? '' : 'align-self-center'">
         <form class="form-signin">
+          <div v-if="errorSignIn" class="border border-danger rounded-pill mb-4 py-2">
+            <span style="color: red;">Email atau Password Salah, Silakan Coba Lagi</span>
+          </div>
           <div class="mb-3">
             <label for="emailId" class="form-label">Email Id</label>
             <input
@@ -55,24 +58,25 @@ export default {
   },
   data() {
     return {
-      windowWidth:0,
+      windowWidth: 0,
       email: "",
       password: "",
       loading: null,
       role: null,
+      errorSignIn: null,
     };
   },
   created() {
-      window.addEventListener('resize', this.handleResize);
-      this.handleResize();
+    window.addEventListener("resize", this.handleResize);
+    this.handleResize();
   },
   methods: {
     handleResize() {
       this.windowWidth = window.innerWidth;
     },
     isMobile() {
-      if(this.windowWidth <= 900) return true
-      else return false
+      if (this.windowWidth <= 900) return true;
+      else return false;
     },
     signIn() {
       this.loading = true;
@@ -95,6 +99,8 @@ export default {
             });
         })
         .catch((err) => {
+          this.loading = false;
+          this.errorSignIn = true;
           console.log(err.message);
         });
     },

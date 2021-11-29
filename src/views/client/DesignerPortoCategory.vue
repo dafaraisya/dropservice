@@ -4,8 +4,19 @@
       <Navbar />
     </div>
     <div class="container mw-75 mt-4 pb-5">
-      <p class="h2 mb-1 fw-bold text-start">{{ this.$route.params.category }}</p>
-      <p class="h5 text-start">Here are some designer for {{ this.$route.params.category }}</p>
+      <p class="h2 mb-1 fw-bold text-start">
+        {{ this.$route.params.category }}
+      </p>
+      <p class="h5 text-start">
+        Here are some designer for {{ this.$route.params.category }}
+      </p>
+      <div
+        v-if="dataNotFound"
+        class="border border-danger rounded-pill py-2"
+        style="margin-top: 80px"
+      >
+        <span>Data Not Found</span>
+      </div>
       <vueper-slides
         class="no-shadow arrows-outside"
         :bullets="false"
@@ -66,6 +77,7 @@ export default {
   data() {
     return {
       listDesigner: [],
+      dataNotFound: null,
     };
   },
   created() {
@@ -81,6 +93,9 @@ export default {
             portoTitle: doc.data().portoTitle,
           });
         });
+        if (this.listDesigner == 0) {
+          this.dataNotFound = true;
+        }
       });
   },
 };

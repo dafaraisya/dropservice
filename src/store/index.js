@@ -26,6 +26,7 @@ export default createStore({
 		profileRole: null,
 		profilePortofolio: null,
 		profileId: null,
+		profilePicture: null,
 		profileInitials: null
 	},
 	mutations: {
@@ -40,6 +41,7 @@ export default createStore({
 			state.profileNumber = doc.data().phoneNumber,
 			state.profileRole = doc.data().role,
 			state.profilePortofolio = doc.data().portofolio,
+			state.profilePicture = doc.data().profilePicture,
 			state.profileId = doc.id;
 		},
 		setProfileInitials(state) {

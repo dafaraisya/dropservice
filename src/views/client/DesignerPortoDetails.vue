@@ -80,7 +80,12 @@
             </button>
           </div>
           <div class="col-6">
-            <button class="btn btn-dark w-100">Order</button>
+            <button
+              @click.prevent="createTransaction"
+              class="btn btn-dark w-100"
+            >
+              Order
+            </button>
           </div>
         </div>
       </div>
@@ -107,6 +112,7 @@ export default {
       selected: "Provision",
       description: "",
       photosOrVideos: [],
+      category: "",
       portoTitle: "",
       price: "",
       provision: "",
@@ -129,6 +135,7 @@ export default {
       .then((snapshot) => {
         this.description = snapshot.data().description;
         this.photosOrVideos = snapshot.data().photosOrVideos;
+        this.category = snapshot.data().category;
         this.portoTitle = snapshot.data().portoTitle;
         this.price = snapshot.data().price;
         this.provision = snapshot.data().provision;
@@ -149,7 +156,9 @@ export default {
       else return false;
     },
     async createChat() {
-      const dataBase = db.collection("chats").doc(this.$store.state.profileId+this.designerId);
+      const dataBase = db
+        .collection("chats")
+        .doc(this.$store.state.profileId + this.designerId);
       await dataBase
         .set({
           clientId: firebase.auth().currentUser.uid,
@@ -158,10 +167,77 @@ export default {
           designerName: this.designerName,
         })
         .then(() => {
-          this.$router.push('/chatroom/'+this.designerName+'/'+this.$store.state.profileId+this.designerId);
+          this.$router.push(
+            "/chatroom/" +
+              this.designerName +
+              "/" +
+              this.$store.state.profileId +
+              this.designerId
+          );
         })
         .catch((error) => {
           console.error("Error adding document: ", error);
+        });
+    },
+    async createTransaction() {
+      const dataBase = db.collection("transactions");
+      await dataBase
+        .add({
+          description: this.description,
+          photosOrVideos: this.photosOrVideos,
+          category: this.category,
+          portoTitle: this.portoTitle,
+          price: this.price,
+          provision: this.provision,
+          howToOrder: this.howToOrder,
+          designerId: this.designerId,
+          designerName: this.designerName,
+          clientId: this.$store.state.profileId,
+          clientName: this.$store.state.profileName,
+        })
+        .then((docRef) => {
+          this.sendNotification(docRef.id);
+          this.$router.push("/detailstransaction/" + docRef.id);
+        })
+        .catch((error) => {
+          console.error("Error adding document: ", error);
+        });
+    },
+    sendNotification(docId) {
+      const today = new Date();
+      let seconds = "";
+      if (today.getSeconds() < 10) {
+        console.log("0" + today.getSeconds().toString());
+        seconds = "0" + today.getSeconds().toString();
+      }
+      if (today.getSeconds() >= 10) {
+        console.log(today.getSeconds().toString());
+        seconds = today.getSeconds().toString();
+      }
+      const date =
+        today.getFullYear() +
+        "-" +
+        (today.getMonth() + 1) +
+        "-" +
+        today.getDate();
+      const time = today.getHours() + ":" + today.getMinutes() + ":" + seconds;
+      const dateTime = date + " " + time;
+      db.collection("notifications")
+        .doc()
+        .set({
+          to: this.designerId,
+          sender: this.$store.state.profileName,
+          senderId: this.$store.state.profileId,
+          notificationType: "transaction",
+          notificationText: "new transaction",
+          time: dateTime,
+          link: "/detailstransaction/" + docId,
+        });
+
+      db.collection("users")
+        .doc(this.$route.params.receiverId)
+        .update({
+          unreadNotifications: firebase.firestore.FieldValue.increment(1),
         });
     },
   },

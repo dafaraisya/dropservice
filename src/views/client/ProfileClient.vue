@@ -2,7 +2,14 @@
   <div class="container vh-100">
     <div class="row h-100">
       <div
-        class="col my-3 d-flex flex-column justify-content-center align-items-center"
+        class="
+          col
+          my-3
+          d-flex
+          flex-column
+          justify-content-center
+          align-items-center
+        "
       >
         <div
           class="
@@ -14,7 +21,16 @@
             bg-black
           "
         >
-          <p class="m-0 display-1">{{ this.$store.state.profileInitials }}</p>
+          <div class="profile-picture">
+            <img
+              :src="this.$store.state.profilePicture"
+              width="150"
+              height="150"
+              class="rounded-pill"
+              alt="..."
+            />
+          </div>
+          <!-- <p class="m-0 display-1">{{ this.$store.state.profileInitials }}</p> -->
         </div>
         <div class="">
           <p class="fs-1 fw-bold m-0 mt-2">
@@ -41,17 +57,41 @@
             type="button"
           />
         </router-link>
-        <router-link to="/chats" class="w-100 my-1">
+        <router-link to="/chats" class="w-100 my-1" v-if="unreadMessages == 0">
           <input
             class="btn fs-5 border-bottom text-start w-100"
             value="Chat"
             type="button"
           />
         </router-link>
-        <router-link to="/notification" class="w-100 my-1">
+        <router-link to="/chats" class="w-100 my-1" v-if="unreadMessages > 0">
+          <input
+            @click="updateUnreadMessages"
+            class="btn fs-5 border-bottom text-start w-100"
+            :value="'Chat' + ' (' + unreadMessages + ')'"
+            type="button"
+          />
+        </router-link>
+        <router-link
+          to="/notification"
+          class="w-100 my-1"
+          v-if="unreadNotifications == 0"
+        >
           <input
             class="btn fs-5 border-bottom text-start w-100"
-            value="Notification"
+            :value="'Notification'"
+            type="button"
+          />
+        </router-link>
+        <router-link
+          to="/notification"
+          class="w-100 my-1"
+          v-if="unreadNotifications > 0"
+        >
+          <input
+            @click="updateUnreadNotification"
+            class="btn fs-5 border-bottom text-start w-100"
+            :value="'Notification' + ' (' + unreadNotifications + ')'"
             type="button"
           />
         </router-link>
@@ -62,9 +102,11 @@
             type="button"
           />
         </router-link>
-        <router-link :to="'/transactions/' + this.$store.state.profileId" class="w-100 my-1">
+        <router-link
+          :to="'/transactions/' + this.$store.state.profileId"
+          class="w-100 my-1"
+        >
           <input
-            style="text-align: left; padding-left: 6px"
             class="btn fs-5 border-bottom text-start w-100"
             value="Transaction History"
             type="button"
@@ -84,7 +126,10 @@
             type="button"
           />
         </router-link>
-        <router-link to="/account-settings" class="w-100 my-1">
+        <router-link
+          :to="'/accountsettings/' + this.$store.state.profileId"
+          class="w-100 my-1"
+        >
           <input
             class="btn fs-5 border-bottom text-start w-100"
             value="Account Settings"
@@ -230,8 +275,15 @@
 <script>
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
+import db from "../../firebase/firebase-init";
 export default {
   name: "Profile",
+  data() {
+    return {
+      unreadMessages: null,
+      unreadNotifications: null,
+    };
+  },
   methods: {
     async signOut() {
       await firebase
@@ -241,6 +293,28 @@ export default {
           this.$router.push("/");
         });
     },
+    updateUnreadMessages() {
+      db.collection("users")
+        .doc(firebase.auth().currentUser.uid)
+        .update({
+          unreadMessages: 0,
+          unreadNotifications: this.unreadNotifications - this.unreadMessages,
+        });
+    },
+    updateUnreadNotification() {
+      db.collection("users").doc(firebase.auth().currentUser.uid).update({
+        unreadNotifications: 0,
+      });
+    },
+  },
+  mounted() {
+    db.collection("users")
+      .doc(firebase.auth().currentUser.uid)
+      .get()
+      .then((snapshot) => {
+        this.unreadMessages = snapshot.data().unreadMessages;
+        this.unreadNotifications = snapshot.data().unreadNotifications;
+      });
   },
 };
 </script>
@@ -249,5 +323,8 @@ export default {
   height: 9em;
   width: 9em;
   color: #fff;
+}
+.profile-picture img {
+  object-fit: cover;
 }
 </style>

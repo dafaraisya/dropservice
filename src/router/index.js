@@ -90,7 +90,7 @@ const routes = [
 		meta: { requiresAuth: true },
 	},
 	{
-		path: '/chatroom/:chatname/:docId',
+		path: '/chatroom/:chatname/:receiverId/:docId',
 		name: 'Chat Room',
 		component: () => import('../views/chats/ChatRoom.vue'),
 		meta: { requiresAuth: true },
@@ -108,7 +108,14 @@ const routes = [
 		meta: { requiresAuth: true },
 	},
 	{
+		path: '/accountsettings/:userId',
+		name: 'Account Settings',
+		component: () => import('../views/profiles/AccountSettings.vue'),
+		meta: { requiresAuth: true },
+	},
+	{
 		path: '/notification',
+		name: 'Notification',
 		component: () => import('../views/Notification.vue')
 	}
 ]

@@ -38,8 +38,8 @@
                     {{ slide.title.toUpperCase() }}
                   </p>
                 </div>
-                <div class="overflow-hidden card-img bg-info">
-                  <embed class="center" :src="slide.img" alt="category" />
+                <div class="overflow-hidden card-img thumbnail-category">
+                  <img :src="slide.img" alt="category" />
                 </div>
               </div>
             </router-link>
@@ -81,14 +81,15 @@
                   <p class="h-6 fw-bold align-self-start m-0 p-0">
                     {{ designer.name }}
                   </p>
-                  <p class="h-6 category fw-light align-self-start m-0 p-0">
-                    {{ designer.name }}
-                  </p>
+                  <!-- <p class="h-6 category fw-light align-self-start m-0 p-0">
+                    {{ designer.profilePicture }}
+                  </p> -->
                 </div>
-                <div class="overflow-hidden card-img bg-info">
-                  <embed
-                    class="center"
-                    src="https://picsum.photos/600/400.jpg"
+                <div class="overflow-hidden card-img profile-picture">
+                  <img
+                    width="220"
+                    height="220"
+                    :src="designer.profilePicture"
                     alt="category"
                   />
                 </div>
@@ -98,7 +99,7 @@
         </vueper-slide>
       </vueper-slides>
     </div>
-    <br><br>
+    <br /><br />
   </div>
 </template>
 
@@ -154,22 +155,22 @@ export default {
       slidesCategory: [
         {
           title: "Web Design",
-          img: "https://picsum.photos/600/400.jpg",
+          img: "https://firebasestorage.googleapis.com/v0/b/dropservice-99b2d.appspot.com/o/assets%2Fweb_design.jpg?alt=media&token=283a49d6-797d-4951-8b45-ad9e344cb510",
           link: "/designerportofolioscategory/Web Design",
         },
         {
           title: "Video Editing",
-          img: "https://picsum.photos/600/400.jpg",
+          img: "https://firebasestorage.googleapis.com/v0/b/dropservice-99b2d.appspot.com/o/assets%2Fvideo_editing.jpg?alt=media&token=daaad03d-027d-4338-9c74-c0d39b2a0f8a",
           link: "/designerportofolioscategory/Video Editing",
         },
         {
           title: "Animation",
-          img: "https://picsum.photos/600/400.jpg",
+          img: "https://firebasestorage.googleapis.com/v0/b/dropservice-99b2d.appspot.com/o/assets%2Fanimation.jpg?alt=media&token=b7c08235-35fc-495f-a43e-76900a91ec19",
           link: "/designerportofolioscategory/Animation",
         },
         {
           title: "App Development",
-          img: "https://picsum.photos/600/400.jpg",
+          img: "https://firebasestorage.googleapis.com/v0/b/dropservice-99b2d.appspot.com/o/assets%2Fapp_development.jpg?alt=media&token=1d5f1ef6-472a-4426-a776-573c302d392a",
           link: "/designerportofolioscategory/App Development",
         },
       ],
@@ -206,6 +207,7 @@ export default {
           this.listDesigner.push({
             docId: doc.id,
             name: doc.data().name,
+            profilePicture: doc.data().profilePicture,
           });
           //   this.chat.docId(doc.id);
         });
@@ -252,6 +254,16 @@ export default {
 
 .category {
   font-size: 1.1rem;
+}
+
+.profile-picture img {
+  object-fit: cover;
+}
+
+.thumbnail-category img {
+  width: 220px;
+  height: 220px;
+  object-fit: cover;
 }
 
 @media only screen and (max-width: 700px) {

@@ -124,9 +124,11 @@ export default {
           address: this.address,
           phoneNumber: this.phoneNumber,
           emailId: this.emailId,
+          profilePicture:
+            "https://firebasestorage.googleapis.com/v0/b/dropservice-99b2d.appspot.com/o/profile-pictures%2Fprofile-image.png?alt=media&token=324902d5-3a67-4521-8ee0-2d6b3fce2d0a",
         });
 
-        this.$router.push('/chooserole/' + result.user.uid);
+        this.$router.push("/chooserole/" + result.user.uid);
         return;
       } else {
         console.log("error");
@@ -154,9 +156,9 @@ input:focus {
   border-color: black;
 }
 .form-signup {
-	margin-top: 100px;
+  margin-top: 100px;
 }
 .btn-signup {
-	height: 60px;
+  height: 60px;
 }
 </style>

@@ -4,15 +4,32 @@
       <Navbar />
     </div>
     <BottomNavbar />
-    <div class="container mw-75 mt-4">  
+    <div class="container mw-75 mt-4">
       <div class="h2 text-start d-flex justify-content-between">
         <h2>Your Portofolio</h2>
-        <router-link to="/addportofolio">
-          <button type="button" class="btn btn-outline-dark rounded-pill py-0 px-3">
-            <span class="bi bi-plus fs-5 align-middle"/>
-            Add
+        <div>
+          <router-link to="/addportofolio">
+            <button
+              type="button"
+              class="btn btn-outline-dark rounded-pill py-0 px-3"
+            >
+              <span class="bi bi-plus fs-5 align-middle" />
+              Add
+            </button>
+          </router-link>
+          <button
+            type="button"
+            class="btn btn-dark rounded-pill py-0 px-3"
+			disabled
+          >
+            <span class="bi bi-people-fill fs-5 align-middle" />
+            Follower : {{follower}}
           </button>
-        </router-link>
+          <!-- <span class="border border-dark rounded-pill py-0 px-3 fs-4">
+            <span class="bi bi-people-fill fs-5 align-middle" />
+            Follower
+          </span> -->
+        </div>
       </div>
       <vueper-slides
         class="no-shadow arrows-outside"
@@ -52,7 +69,7 @@
         </vueper-slide>
       </vueper-slides>
     </div>
-     <br><br><br><br>
+    <br /><br /><br /><br />
   </div>
 </template>
 
@@ -71,6 +88,7 @@ export default {
   data() {
     return {
       portofolios: [],
+      follower: null,
       breakpoints: {
         // 670: {
         //   slideRatio: 1/1.5,
@@ -139,6 +157,7 @@ export default {
       .where("designerId", "==", firebase.auth().currentUser.uid)
       .get()
       .then((querysnapshot) => {
+        this.getFollower();
         querysnapshot.forEach((doc) => {
           this.portofolios.push({
             docId: doc.id,
@@ -148,6 +167,16 @@ export default {
           //   this.chat.docId(doc.id);
         });
       });
+  },
+  methods: {
+    getFollower() {
+      db.collection("users")
+        .doc(this.$store.state.profileId)
+        .get()
+        .then((snapshot) => {
+          this.follower = snapshot.data().follower.length;
+        });
+    },
   },
 };
 </script>
@@ -183,5 +212,9 @@ export default {
 
 .center {
   object-position: center;
+}
+.btn.btn-dark[disabled] {
+	margin-left: 20px;
+    background-color: #0b3985;
 }
 </style>
