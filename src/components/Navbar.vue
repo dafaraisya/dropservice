@@ -26,7 +26,7 @@
           <div id="circle" class="rounded-circle bg-black">
             <div class="profile-picture">
               <img
-                :src="this.$store.state.profilePicture"
+                :src="profilePicture"
                 width="40"
                 height="40"
                 class="rounded-pill"
@@ -58,7 +58,7 @@
               unreadNotifications
             }}</span>
             <img
-              :src="this.$store.state.profilePicture"
+              :src="profilePicture"
               width="40"
               height="40"
               class="rounded-pill"
@@ -76,7 +76,7 @@
               unreadNotifications
             }}</span>
             <img
-              :src="this.$store.state.profilePicture"
+              :src="profilePicture"
               width="40"
               height="40"
               class="rounded-pill"
@@ -103,18 +103,21 @@ export default {
   data() {
     return {
       profileRole: "",
+      profilePicture: "",
       unreadNotifications: 0,
     };
   },
   mounted() {
-    setTimeout(() => {
-      this.profileRole = this.$store.state.profileRole;
-    }, 500);
+    // setTimeout(() => {
+    //   this.profileRole = this.$store.state.profileRole;
+    // }, 500);
     db.collection("users")
       .doc(firebase.auth().currentUser.uid)
       .get()
       .then((snapshot) => {
         this.unreadNotifications = snapshot.data().unreadNotifications;
+        this.profilePicture = snapshot.data().profilePicture;
+        this.profileRole = snapshot.data().role;
       });
   },
 };

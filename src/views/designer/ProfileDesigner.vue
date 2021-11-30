@@ -1,5 +1,27 @@
 <template>
   <div class="container vh-100">
+    <div class="row row-content">
+      <div class="col align-self-start">
+        <div class="back-home">
+          <router-link
+            v-if="this.$store.state.profileRole == 'designer'"
+            to="/homedesigner"
+          >
+            <button style="padding: 0; border: none; background: none">
+              <p class="h3 bi bi-arrow-left-circle-fill">Back To Home</p>
+            </button>
+          </router-link>
+          <router-link
+            v-if="this.$store.state.profileRole == 'client'"
+            to="/homeclient"
+          >
+            <button style="padding: 0; border: none; background: none">
+              <p class="h3 bi bi-arrow-left-circle-fill">Back To Home</p>
+            </button>
+          </router-link>
+        </div>
+      </div>
+    </div>
     <div class="row h-100">
       <div
         class="
@@ -209,6 +231,11 @@ export default {
 };
 </script>
 <style scoped>
+.back-home {
+  position: absolute;
+  top: 50px;
+  left: 120px;
+}
 .profile-shape {
   height: 9em;
   width: 9em;
@@ -216,5 +243,14 @@ export default {
 }
 .profile-picture img {
   object-fit: cover;
+}
+@media only screen and (max-width: 700px) {
+  .back-home {
+    position: absolute;
+    left: 35px;
+  }
+  .row-content {
+    margin-top: 100px;
+  }
 }
 </style>

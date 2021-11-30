@@ -6,7 +6,7 @@
     <BottomNavbar />
     <div class="container mw-75 mt-4">
       <div class="h2 text-start d-flex justify-content-between">
-        <h2>Your Portofolio</h2>
+        <h2>My Portofolio</h2>
         <div>
           <router-link to="/addportofolio">
             <button
@@ -20,16 +20,23 @@
           <button
             type="button"
             class="btn btn-dark rounded-pill py-0 px-3"
-			disabled
+            disabled
           >
             <span class="bi bi-people-fill fs-5 align-middle" />
-            Follower : {{follower}}
+            {{ follower }}
           </button>
           <!-- <span class="border border-dark rounded-pill py-0 px-3 fs-4">
             <span class="bi bi-people-fill fs-5 align-middle" />
             Follower
           </span> -->
         </div>
+      </div>
+      <div
+        v-if="portoNotFound"
+        class="border border-danger rounded-pill py-2"
+        style="margin-top: 80px"
+      >
+        <span>Data Not Found, Please Upload Your Portofolio</span>
       </div>
       <vueper-slides
         class="no-shadow arrows-outside"
@@ -88,6 +95,7 @@ export default {
   data() {
     return {
       portofolios: [],
+      portoNotFound: null,
       follower: null,
       breakpoints: {
         // 670: {
@@ -166,6 +174,9 @@ export default {
           });
           //   this.chat.docId(doc.id);
         });
+        if (this.portofolios.length < 1) {
+          this.portoNotFound = true;
+        }
       });
   },
   methods: {
@@ -214,7 +225,7 @@ export default {
   object-position: center;
 }
 .btn.btn-dark[disabled] {
-	margin-left: 20px;
-    background-color: #0b3985;
+  margin-left: 20px;
+  background-color: #0b3985;
 }
 </style>

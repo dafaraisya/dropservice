@@ -1,6 +1,28 @@
 <template>
   <div class="container vh-100">
-    <div class="row h-100">
+    <div class="row">
+      <div class="col align-self-start">
+        <div class="back-home">
+          <router-link
+            v-if="this.$store.state.profileRole == 'designer'"
+            to="/homedesigner"
+          >
+            <button style="padding: 0; border: none; background: none">
+              <p class="h3 bi bi-arrow-left-circle-fill">Back To Home</p>
+            </button>
+          </router-link>
+          <router-link
+            v-if="this.$store.state.profileRole == 'client'"
+            to="/homeclient"
+          >
+            <button style="padding: 0; border: none; background: none">
+              <p class="h3 bi bi-arrow-left-circle-fill">Back To Home</p>
+            </button>
+          </router-link>
+        </div>
+      </div>
+    </div>
+    <div class="row h-100 row-content">
       <div
         class="
           col
@@ -18,7 +40,6 @@
             justify-content-center
             align-items-center
             rounded-circle
-            bg-black
           "
         >
           <div class="profile-picture">
@@ -50,13 +71,6 @@
       <div
         class="col d-flex flex-column justify-content-center align-items-center"
       >
-        <router-link to="/homedesigner" class="w-100 my-1">
-          <input
-            class="btn fs-5 border-bottom text-start w-100"
-            value="Portofolio"
-            type="button"
-          />
-        </router-link>
         <router-link to="/chats" class="w-100 my-1" v-if="unreadMessages == 0">
           <input
             class="btn fs-5 border-bottom text-start w-100"
@@ -95,13 +109,6 @@
             type="button"
           />
         </router-link>
-        <router-link to="/description-specialization" class="w-100 my-1">
-          <input
-            class="btn fs-5 border-bottom text-start w-100"
-            value="Description & Specialization"
-            type="button"
-          />
-        </router-link>
         <router-link
           :to="'/transactions/' + this.$store.state.profileId"
           class="w-100 my-1"
@@ -109,20 +116,6 @@
           <input
             class="btn fs-5 border-bottom text-start w-100"
             value="Transaction History"
-            type="button"
-          />
-        </router-link>
-        <router-link to="/designer-cost" class="w-100 my-1">
-          <input
-            class="btn fs-5 border-bottom text-start w-100"
-            value="Designer Cost"
-            type="button"
-          />
-        </router-link>
-        <router-link to="/last-seen" class="w-100 my-1">
-          <input
-            class="btn fs-5 border-bottom text-start w-100"
-            value="Last Seen"
             type="button"
           />
         </router-link>
@@ -161,116 +154,6 @@
       </div>
     </div>
   </div>
-  <!-- <div class="profile vh-100">
-    <div class="container h-100">
-      <div class="row align-self-center h-100">
-        <div class="col align-self-center">
-          <div class="row">
-            <div id="circle" class="rounded-circle bg-black">
-              <span class="initial-name mt-5">
-                <p class="initial-name">
-                  {{ this.$store.state.profileInitials }}
-                </p>
-              </span>
-            </div>
-            <div id="profile-name">
-              <p class="fs-1 fw-bold">{{ this.$store.state.profileName }}</p>
-              <p
-                v-if="this.$store.state.profileRole == 'designer'"
-                class="fs-3 bold"
-              >
-                Designer
-              </p>
-              <p
-                v-if="this.$store.state.profileRole == 'client'"
-                class="fs-3 bold"
-              >
-                Client
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col list-option align-self-center">
-          <div class="d-grid gap-2">
-            <router-link to="/homedesigner">
-              <input
-                style="text-align: left; padding-left: 6px"
-                class="btn fs-5 border-bottom text-start"
-                value="Portofolio"
-                type="button"
-              />
-            </router-link>
-            <router-link to="/chats">
-              <input
-                style="text-align: left; padding-left: 6px"
-                class="btn fs-5 border-bottom text-start"
-                value="Chat"
-                type="button"
-              />
-            </router-link>
-            <router-link to="/description-specialization">
-              <input
-                style="text-align: left; padding-left: 6px"
-                class="btn fs-5 border-bottom text-start"
-                value="Description & Specialization"
-                type="button"
-              />
-            </router-link>
-            <router-link to="/designer-cost">
-              <input
-                style="text-align: left; padding-left: 6px"
-                class="btn fs-5 border-bottom text-start"
-                value="Designer Cost"
-                type="button"
-              />
-            </router-link>
-            <router-link to="/last-seen">
-              <input
-                style="text-align: left; padding-left: 6px"
-                class="btn fs-5 border-bottom text-start"
-                value="Last Seen"
-                type="button"
-              />
-            </router-link>
-            <router-link to="/account-settings">
-              <input
-                style="text-align: left; padding-left: 6px"
-                class="btn fs-5 border-bottom text-start"
-                value="Account Settings"
-                type="button"
-              />
-            </router-link>
-            <router-link to="/privacy-security">
-              <input
-                style="text-align: left; padding-left: 6px"
-                class="btn fs-5 border-bottom text-start"
-                value="Privacy and Security"
-                type="button"
-              />
-            </router-link>
-            <router-link to="/help">
-              <input
-                style="text-align: left; padding-left: 6px"
-                class="btn fs-5 border-bottom text-start"
-                value="Help"
-                type="button"
-              />
-            </router-link>
-            <router-link to="/profile">
-              <input
-                @click="signOut"
-                style="text-align: left; padding-left: 6px"
-                class="btn fs-5 border-bottom text-start"
-                value="Sign Out"
-                type="button"
-              />
-            </router-link>
-          </div>
-          <br />
-        </div>
-      </div>
-    </div>
-  </div> -->
 </template>
 <script>
 import firebase from "firebase/compat/app";
@@ -319,6 +202,11 @@ export default {
 };
 </script>
 <style scoped>
+.back-home {
+  position: absolute;
+  top: 50px;
+  left: 120px;
+}
 .profile-shape {
   height: 9em;
   width: 9em;
@@ -326,5 +214,14 @@ export default {
 }
 .profile-picture img {
   object-fit: cover;
+}
+@media only screen and (max-width: 700px) {
+  .back-home {
+    position: absolute;
+    left: 35px;
+  }
+  .row-content {
+    margin-top: 100px;
+  }
 }
 </style>

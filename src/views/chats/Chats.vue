@@ -202,6 +202,7 @@ export default {
           .onSnapshot((snap) => {
             for (let i = 0; i < snap.docs.length; i++) {
               this.chats[i] = snap.docs[i].data();
+              this.chats[i].docId = snap.docs[i].id;
               this.getProfilePicture(snap.docs[i].data().clientId, i);
             }
           });
@@ -228,6 +229,7 @@ export default {
           .onSnapshot((snap) => {
             for (let i = 0; i < snap.docs.length; i++) {
               this.chats[i] = snap.docs[i].data();
+              this.chats[i].docId = snap.docs[i].id;
               this.getProfilePicture(snap.docs[i].data().designerId, i);
             }
           });

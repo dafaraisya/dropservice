@@ -217,4 +217,10 @@ input[type="file"] {
   padding: 6px 12px;
   cursor: pointer;
 }
+@media only screen and (max-width: 700px) {
+  .back-home {
+    position: absolute;
+	left: 35px;
+  }
+}
 </style>

@@ -171,6 +171,8 @@ export default {
             "/chatroom/" +
               this.designerName +
               "/" +
+              this.designerId +
+              "/" +
               this.$store.state.profileId +
               this.designerId
           );
