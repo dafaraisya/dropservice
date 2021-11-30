@@ -4,24 +4,20 @@
       <Navbar />
     </div>
     <BottomNavbar />
-    <div class="container mw-75 mt-4">
+    <div class="container mt-4 home-designer-content">
       <div class="h2 text-start d-flex justify-content-between">
-        <h2>My Portofolio</h2>
+        <h2>Your Portofolio</h2>
         <div>
           <router-link to="/addportofolio">
             <button
               type="button"
-              class="btn btn-outline-dark rounded-pill py-0 px-3"
+              class="btn btn-outline-dark rounded-pill py-0"
             >
               <span class="bi bi-plus fs-5 align-middle" />
               Add
             </button>
           </router-link>
-          <button
-            type="button"
-            class="btn btn-dark rounded-pill py-0 px-3"
-            disabled
-          >
+          <button type="button" class="btn btn-dark rounded-pill py-0" disabled>
             <span class="bi bi-people-fill fs-5 align-middle" />
             {{ follower }}
           </button>
@@ -200,7 +196,7 @@ export default {
   background-size: cover;
 }
 
-.mw-75 {
+.home-designer-content {
   max-width: 75%;
 }
 
@@ -227,5 +223,10 @@ export default {
 .btn.btn-dark[disabled] {
   margin-left: 20px;
   background-color: #0b3985;
+}
+@media only screen and (max-width: 700px) {
+  .home-designer-content {
+    max-width: 100%;
+  }
 }
 </style>

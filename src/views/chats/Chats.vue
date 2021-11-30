@@ -84,6 +84,7 @@
               <p class="m-0 p-0 lh-base">All Messages</p>
             </div>
           </div>
+          <div v-if="dataNotFound">Data Not Found</div>
           <div v-for="(chat, i) in chats" :key="i">
             <router-link
               v-if="this.$store.state.profileRole == 'designer'"
@@ -159,6 +160,7 @@ export default {
   data() {
     return {
       chats: [],
+      dataNotFound: null,
     };
   },
   methods: {
@@ -205,6 +207,9 @@ export default {
               this.chats[i].docId = snap.docs[i].id;
               this.getProfilePicture(snap.docs[i].data().clientId, i);
             }
+            if (this.chats.length < 1) {
+              this.dataNotFound = true;
+            }
           });
       }
 
@@ -231,6 +236,9 @@ export default {
               this.chats[i] = snap.docs[i].data();
               this.chats[i].docId = snap.docs[i].id;
               this.getProfilePicture(snap.docs[i].data().designerId, i);
+            }
+            if (this.chats.length < 1) {
+              this.dataNotFound = true;
             }
           });
       }

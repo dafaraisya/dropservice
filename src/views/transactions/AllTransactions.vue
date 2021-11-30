@@ -4,7 +4,7 @@
       <div class="row align-self-center h-100">
         <div class="col align-self-center">
           <div class="row">
-            <div id="circle" class="rounded-circle bg-black">
+            <div id="circle" class="rounded-circle">
               <div class="profile-picture">
                 <img
                   :src="this.$store.state.profilePicture"
@@ -42,6 +42,7 @@
             <div style="color: black; font-size: 20px">
               All Transaction History
             </div>
+			<div v-if="dataNotFound">Data Not Found</div>
             <div v-for="transaction in transactions" :key="transaction">
               <div class="transaction-section">
                 <router-link :to="'/detailstransaction/' + transaction.docId">
@@ -91,6 +92,7 @@ export default {
   data() {
     return {
       transactions: [],
+      dataNotFound: null,
     };
   },
   created() {
@@ -107,6 +109,9 @@ export default {
                 clientName: doc.data().clientName,
               });
             });
+            if (this.transactions.length < 1) {
+              this.dataNotFound = true;
+            }
           });
       }
 
@@ -122,6 +127,9 @@ export default {
                 designerName: doc.data().designerName,
               });
             });
+            if (this.transactions.length < 1) {
+              this.dataNotFound = true;
+            }
           });
       }
     }, 500);
