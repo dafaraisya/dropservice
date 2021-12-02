@@ -11,7 +11,7 @@
             to="/homedesigner"
           >
             <button style="padding: 0; border: none; background: none">
-              <p class="h3 bi bi-arrow-left-circle-fill">Back To Home</p>
+              <p class="h3 bi bi-arrow-left-circle-fill"><span class="ms-3">Back To Home</span></p>
             </button>
           </router-link>
           <router-link
@@ -19,7 +19,7 @@
             to="/homeclient"
           >
             <button style="padding: 0; border: none; background: none">
-              <p class="h3 bi bi-arrow-left-circle-fill">Back To Home</p>
+              <p class="h3 bi bi-arrow-left-circle-fill"><span class="ms-3">Back To Home</span></p>
             </button>
           </router-link>
         </div>
@@ -30,8 +30,6 @@
         <div class="profile-picture">
           <img
             :src="profilePicture"
-            width="300"
-            height="300"
             class="rounded-pill"
             alt="..."
           />
@@ -204,6 +202,8 @@ export default {
   border-radius: 0 !important;
 }
 .profile-picture img {
+  width: 200px;
+  height: 200px;
   object-fit: cover;
 }
 input[type="file"] {

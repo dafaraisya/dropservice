@@ -8,7 +8,7 @@
             to="/homedesigner"
           >
             <button style="padding: 0; border: none; background: none">
-              <p class="h3 bi bi-arrow-left-circle-fill">Back To Home</p>
+              <p class="h3 bi bi-arrow-left-circle-fill"><span class="ms-3">Back To Home</span></p>
             </button>
           </router-link>
           <router-link
@@ -16,7 +16,7 @@
             to="/homeclient"
           >
             <button style="padding: 0; border: none; background: none">
-              <p class="h3 bi bi-arrow-left-circle-fill">Back To Home</p>
+              <p class="h3 bi bi-arrow-left-circle-fill"><span class="ms-3">Back To Home</span></p>
             </button>
           </router-link>
         </div>

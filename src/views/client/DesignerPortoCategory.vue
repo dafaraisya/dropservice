@@ -51,7 +51,7 @@
                     {{ designer.designerName }}
                   </p>
                 </div>
-                <div class="overflow-hidden card-img bg-info">
+                <div class="overflow-hidden card-img bg-info my-2">
                   <embed
                     class="center"
                     :src="designer.photosOrVideos"
@@ -134,6 +134,12 @@ export default {
   height: 120px;
   align-self: center;
   border-radius: 10px;
+}
+
+.card-img embed {
+  width: inherit;
+  height: 100%;
+  object-fit: cover;
 }
 
 .category {

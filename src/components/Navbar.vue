@@ -1,6 +1,6 @@
 <template>
-  <nav class="container pt-5 navbar navbar-light justify-content-between">
-    <a class="navbar-brand" href="#"
+  <nav class="container  pt-5 navbar navbar-light justify-content-between">
+    <a class="navbar-brand d-md-flex d-none" href="#"
       ><img class="logo-img" src="../assets/logo.png" alt=""
     /></a>
 
@@ -19,10 +19,7 @@
         />
 
         <!-- PROFIL PADA TAMPILAN MOBILE -->
-        <div class="d-none mobile flex-row align-items-center">
-          <div class="role bg-black rounded-pill py-2 px-3 me-3 text-white">
-            {{ profileRole }}
-          </div>
+        <div class="d-md-none d-flex flex-row align-items-center">
           <div id="circle" class="rounded-circle bg-black">
             <div class="profile-picture">
               <img
@@ -33,23 +30,19 @@
                 alt="..."
               />
             </div>
-            <!-- <div class="mt-1"></div>
-            <span class="initial-name mt-5">{{
-              this.$store.state.profileInitials
-            }}</span> -->
           </div>
         </div>
       </div>
     </div>
 
     <!-- PROFILE PADA TAMPILAN DESKTOP -->
-    <div class="web d-flex flex-row align-items-center">
-      <div class="role bg-black rounded-pill py-2 px-3 me-3 text-white">
+    <div class="d-none d-md-flex flex-row align-items-center">
+      <div class="role rounded-pill py-2 px-3 me-3 text-white" :class="isClient()">
         {{ profileRole }}
       </div>
       <div id="circle" class="rounded-circle bg-black">
         <router-link
-          v-if="this.profileRole == 'designer'"
+          v-if="this.profileRole.toLowerCase() == 'designer'"
           to="/profiledesigner"
           style="text-decoration: none; color: inherit"
         >
@@ -67,7 +60,7 @@
           </div>
         </router-link>
         <router-link
-          v-if="this.profileRole == 'client'"
+          v-if="this.profileRole.toLowerCase() == 'client'"
           to="/profileclient"
           style="text-decoration: none; color: inherit"
         >
@@ -83,11 +76,6 @@
               alt="..."
             />
           </div>
-          <!-- <h1 style="font-color:red;">lalalalalalalal</h1> -->
-          <!-- <div class="mt-1"></div>
-          <span class="initial-name mt-5">{{
-            this.$store.state.profileInitials
-          }}</span> -->
         </router-link>
       </div>
     </div>
@@ -107,6 +95,12 @@ export default {
       unreadNotifications: 0,
     };
   },
+  methods: {
+    isClient() {
+      if(this.profileRole.toLowerCase() == 'client') return 'bg-role-client px-4'
+      else return 'bg-role-designer'
+    }
+  },
   mounted() {
     // setTimeout(() => {
     //   this.profileRole = this.$store.state.profileRole;
@@ -118,6 +112,7 @@ export default {
         this.unreadNotifications = snapshot.data().unreadNotifications;
         this.profilePicture = snapshot.data().profilePicture;
         this.profileRole = snapshot.data().role;
+        this.profileRole = this.profileRole[0].toUpperCase() + this.profileRole.substring(1);
       });
   },
 };
@@ -166,6 +161,14 @@ export default {
   color: white;
 }
 
+.bg-role-client {
+  background: #ea4335;
+}
+
+.bg-role-designer {
+  background: blue;
+}
+
 .width {
   width: 75%;
 }
@@ -186,17 +189,7 @@ export default {
   display: inline-block;
 }
 
-@media only screen and (max-width: 700px) {
-  .navbar-brand,
-  .role,
-  .web {
-    display: none !important;
-  }
-
-  .mobile {
-    display: flex !important;
-  }
-
+@media only screen and (max-width: 768px) {
   .width {
     width: 100% !important;
   }

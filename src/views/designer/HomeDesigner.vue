@@ -17,7 +17,7 @@
               Add
             </button>
           </router-link>
-          <button type="button" class="btn btn-dark rounded-pill py-0" disabled>
+          <button type="button" class="btn btn-dark rounded-pill py-0 ms-2" disabled>
             <span class="bi bi-people-fill fs-5 align-middle" />
             {{ follower }}
           </button>
@@ -203,6 +203,7 @@ export default {
 .card-img {
   width: 120px;
   height: 120px;
+  object-fit: cover;
 }
 
 .vueperslide {

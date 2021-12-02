@@ -38,7 +38,7 @@
                     {{ slide.title.toUpperCase() }}
                   </p>
                 </div>
-                <div class="overflow-hidden card-img thumbnail-category">
+                <div class="card-img">
                   <img :src="slide.img" alt="category" />
                 </div>
               </div>
@@ -85,10 +85,8 @@
                     {{ designer.profilePicture }}
                   </p> -->
                 </div>
-                <div class="overflow-hidden card-img profile-picture">
+                <div class=" card-img">
                   <img
-                    width="220"
-                    height="220"
                     :src="designer.profilePicture"
                     alt="category"
                   />
@@ -148,8 +146,8 @@ export default {
           visibleSlides: 3,
         },
         1000: {
-          slideRatio: 1 / 2,
-          visibleSlides: 2,
+          slideRatio: 1 / 2.6,
+          visibleSlides: 3,
         },
       },
       slidesCategory: [
@@ -229,7 +227,6 @@ export default {
 }
 
 .vueperslide {
-  margin: 3px;
   padding: 10px 20px;
   background: #737373;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
@@ -250,20 +247,18 @@ export default {
   height: 120px;
   align-self: center;
   border-radius: 10px;
+  overflow: hidden;
+}
+
+.card-img img {
+  width: inherit;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 .category {
   font-size: 1.1rem;
-}
-
-.profile-picture img {
-  object-fit: cover;
-}
-
-.thumbnail-category img {
-  width: 220px;
-  height: 220px;
-  object-fit: cover;
 }
 
 @media only screen and (max-width: 700px) {
