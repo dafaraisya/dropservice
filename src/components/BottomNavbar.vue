@@ -29,7 +29,7 @@
           </button>
         </router-link>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" @click="updateUnreadMessages">
         <router-link to="/chats">
           <div class="chat-shape bg-black rounded-circle">
             <button class="h-100 border-0 m-0 p-0 bg-transparent">
@@ -38,7 +38,7 @@
           </div>
         </router-link>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" @click="unreadNotifications">
         <router-link to="/notification">
           <button class="h-100 border-0 m-0 p-0 bg-transparent">
             <i class="bi bi-bell h1"></i>
@@ -74,6 +74,22 @@ export default {
     return {
       profileRole: "",
     };
+  },
+  methods: {
+    updateUnreadMessages() {
+      db.collection("users")
+        .doc(firebase.auth().currentUser.uid)
+        .update({
+          unreadMessages: 0,
+          unreadNotifications: this.unreadNotifications - this.unreadMessages,
+        });
+    },
+    updateUnreadNotification() {
+      db.collection("users").doc(firebase.auth().currentUser.uid).update({
+        unreadMessages: 0,
+        unreadNotifications: 0,
+      });
+    },
   },
   mounted() {
     // setTimeout(() => {

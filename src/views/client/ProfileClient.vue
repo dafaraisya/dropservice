@@ -8,7 +8,9 @@
             to="/homedesigner"
           >
             <button style="padding: 0; border: none; background: none">
-              <p class="h3 bi bi-arrow-left-circle-fill"><span class="ms-3">Back To Home</span></p>
+              <p class="h3 bi bi-arrow-left-circle-fill">
+                <span class="ms-3">Back To Home</span>
+              </p>
             </button>
           </router-link>
           <router-link
@@ -16,7 +18,9 @@
             to="/homeclient"
           >
             <button style="padding: 0; border: none; background: none">
-              <p class="h3 bi bi-arrow-left-circle-fill"><span class="ms-3">Back To Home</span></p>
+              <p class="h3 bi bi-arrow-left-circle-fill">
+                <span class="ms-3">Back To Home</span>
+              </p>
             </button>
           </router-link>
         </div>
@@ -71,7 +75,7 @@
       <div
         class="col d-flex flex-column justify-content-center align-items-center"
       >
-        <router-link to="/chats" class="w-100 my-1" v-if="unreadMessages == 0">
+        <router-link to="/chats" class="w-100 my-1" v-if="unreadMessages < 1">
           <input
             class="btn fs-5 border-bottom text-start w-100"
             value="Chat"
@@ -89,7 +93,7 @@
         <router-link
           to="/notification"
           class="w-100 my-1"
-          v-if="unreadNotifications == 0"
+          v-if="unreadNotifications < 1"
         >
           <input
             class="btn fs-5 border-bottom text-start w-100"
@@ -186,6 +190,7 @@ export default {
     },
     updateUnreadNotification() {
       db.collection("users").doc(firebase.auth().currentUser.uid).update({
+        unreadMessages: 0,
         unreadNotifications: 0,
       });
     },
