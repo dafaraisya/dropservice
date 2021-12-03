@@ -44,16 +44,17 @@
                 "
               >
                 <div class="min-width mb-3">
-                  <p class="h-6 fw-bold align-self-start m-0 p-0">
-                    {{ designer.portoTitle }}
-                  </p>
+                  <div>
+                    <p class="h-6 max-line fw-bold align-self-start m-0 p-0">
+                      {{ designer.portoTitle }}
+                    </p>
+                  </div>
                   <p class="h-6 category fw-light align-self-start m-0 p-0">
                     {{ designer.designerName }}
                   </p>
                 </div>
                 <div class="overflow-hidden card-img bg-info my-2">
                   <embed
-                    class="center"
                     :src="designer.photosOrVideos"
                     alt="category"
                   />
@@ -78,6 +79,29 @@ export default {
     return {
       listDesigner: [],
       dataNotFound: null,
+      breakpoints: {
+        // 670: {
+        //   slideRatio: 1/1.5,
+        //   visibleSlides: 2,
+        //   arrows: false,
+        // },
+        800: {
+          slideRatio: 1 / 1.6,
+          visibleSlides: 2,
+          arrows: false,
+        },
+        1430: {
+          slideRatio: 1 / 3.5,
+        },
+        1180: {
+          slideRatio: 1 / 2.7,
+          visibleSlides: 3,
+        },
+        1000: {
+          slideRatio: 1 / 2.6,
+          visibleSlides: 3,
+        },
+      },
     };
   },
   created() {
@@ -122,6 +146,13 @@ export default {
   font-size: 1.3rem;
   font-weight: bold;
   text-align: start;
+}
+
+.max-line {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
 }
 
 .min-width {
