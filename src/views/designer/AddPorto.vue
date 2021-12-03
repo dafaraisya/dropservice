@@ -15,13 +15,27 @@
           </label>
         </div>
         <!-- <div class="porto-img bg-black mt-3 mb-2"></div> -->
-        <Carousel v-if="photosOrVideos.length > 0"
+        <Carousel
+          v-if="photosOrVideos.length > 0"
           class="porto-img bg-black mt-3 mb-2 overflow-hidden"
           :assets="photosOrVideos"
         />
-        <div v-else class="porto-img bg-black mt-3 mb-2 overflow-hidden position-relative">
-			<h6 class="text-white position-absolute top-50 start-50 translate-middle">Silahkan Upload Foto atau Video Anda</h6>
-		</div>
+        <div
+          v-else
+          class="porto-img bg-black mt-3 mb-2 overflow-hidden position-relative"
+        >
+          <h6
+            class="
+              text-white
+              position-absolute
+              top-50
+              start-50
+              translate-middle
+            "
+          >
+            Silahkan Upload Foto atau Video Anda
+          </h6>
+        </div>
         <div class="d-flex">
           <div
             v-for="(photoOrVideo, index) in photosOrVideos"
@@ -184,13 +198,17 @@ export default {
       let file = e.target.files[0];
       var storageRef = firebase.storage().ref("portofolios/" + file.name);
       let uploadTask = storageRef.put(file);
-      uploadTask.then(() => {
-        uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-          this.photosOrVideos.push(downloadURL);
-          this.loading = false;
-          console.log(downloadURL);
+      uploadTask
+        .then(() => {
+          uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+            this.photosOrVideos.push(downloadURL);
+            this.loading = false;
+            console.log(downloadURL);
+          });
+        })
+        .catch((error) => {
+          console.log(error);
         });
-      });
     },
     async addPorto() {
       if (
@@ -293,6 +311,6 @@ input[type="file"] {
 }
 
 .delete-img:hover {
-	cursor: pointer;
+  cursor: pointer;
 }
 </style>

@@ -127,6 +127,7 @@ export default {
           follower: [],
           unreadMessages: 0,
           unreadNotifications: 0,
+          specialization: "",
           profilePicture:
             "https://firebasestorage.googleapis.com/v0/b/dropservice-99b2d.appspot.com/o/profile-pictures%2Fprofile-image.png?alt=media&token=324902d5-3a67-4521-8ee0-2d6b3fce2d0a",
         });

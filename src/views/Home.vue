@@ -2,12 +2,37 @@
   <div class="home vh-100">
     <!-- <img alt="Vue logo" src="../assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-    <div class="container logo-home h-100">
-      <div class="row align-self-center h-100" :class="isMobile() ? 'row-cols-1' : ''">
+    <div v-if="splashScreen" class="container logo-home h-100">
+      <div
+        class="row align-self-center h-100"
+        :class="isMobile() ? 'row-cols-1' : ''"
+      >
+        <div class="col align-self-center splashScreenImg">
+          <img class="logo-img" src="../assets/logo.png" alt="" />
+        </div>
+        <div
+          class="col signin-signup"
+          :class="isMobile() ? '' : 'align-self-center'"
+        >
+          <div class="d-grid gap-2 splashScreen">
+            <p style="font-size: 40px;">dropservice</p>
+          </div>
+          <br />
+        </div>
+      </div>
+    </div>
+    <div v-else class="container logo-home h-100">
+      <div
+        class="row align-self-center h-100"
+        :class="isMobile() ? 'row-cols-1' : ''"
+      >
         <div class="col align-self-center">
           <img class="logo-img" src="../assets/logo.png" alt="" />
         </div>
-        <div class="col signin-signup" :class="isMobile() ? '' : 'align-self-center'">
+        <div
+          class="col signin-signup"
+          :class="isMobile() ? '' : 'align-self-center'"
+        >
           <div class="d-grid gap-2">
             <router-link to="/signin">
               <button
@@ -19,7 +44,15 @@
             </router-link>
             <router-link to="/signup">
               <button
-                class="w-75 btn btn-light shadow rounded-pill btn-home mt-3 fs-3"
+                class="
+                  w-75
+                  btn btn-light
+                  shadow
+                  rounded-pill
+                  btn-home
+                  mt-3
+                  fs-3
+                "
                 type="button"
               >
                 Sign Up
@@ -39,20 +72,21 @@ export default {
   data() {
     return {
       windowWidth: 0,
-    }
+      splashScreen: true,
+    };
   },
   created() {
-    window.addEventListener('resize', this.handleResize);
+    window.addEventListener("resize", this.handleResize);
     this.handleResize();
   },
   methods: {
     handleResize() {
-        this.windowWidth = window.innerWidth;
+      this.windowWidth = window.innerWidth;
     },
     isMobile() {
-        if(this.windowWidth <= 900) return true
-        else return false
-    }
+      if (this.windowWidth <= 900) return true;
+      else return false;
+    },
   },
   mounted() {
     if (localStorage.getItem("reloadedhome")) {
@@ -64,6 +98,9 @@ export default {
       localStorage.setItem("reloadedhome", "1");
       location.reload();
     }
+    setTimeout(() => {
+      this.splashScreen = false;
+    }, 4000);
   },
 };
 </script>
@@ -76,5 +113,56 @@ export default {
 
 .logo-img {
   width: 60%;
+}
+@keyframes splashScreenImg {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@keyframes splashScreen {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes signinSignup {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.splashScreenImg {
+  opacity: 1;
+  animation-name: splashScreenImg;
+  animation-duration: 4s;
+}
+.splashScreen {
+  opacity: 0;
+  animation-name: splashScreen;
+  animation-duration: 4s;
+}
+.signin-signup {
+  opacity: 1;
+  animation-name: signinSignup;
+  animation-duration: 2s;
 }
 </style>

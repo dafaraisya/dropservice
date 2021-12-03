@@ -81,9 +81,9 @@
                   <p class="h-6 fw-bold align-self-start m-0 p-0">
                     {{ designer.name }}
                   </p>
-                  <!-- <p class="h-6 category fw-light align-self-start m-0 p-0">
-                    {{ designer.profilePicture }}
-                  </p> -->
+                  <p class="h-6 category fw-light align-self-start m-0 p-0">
+                    {{ designer.specialization }}
+                  </p>
                 </div>
                 <div class=" card-img">
                   <img
@@ -205,6 +205,7 @@ export default {
           this.listDesigner.push({
             docId: doc.id,
             name: doc.data().name,
+            specialization: doc.data().specialization,
             profilePicture: doc.data().profilePicture,
           });
           //   this.chat.docId(doc.id);

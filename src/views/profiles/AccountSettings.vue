@@ -11,7 +11,9 @@
             to="/homedesigner"
           >
             <button style="padding: 0; border: none; background: none">
-              <p class="h3 bi bi-arrow-left-circle-fill"><span class="ms-3">Back To Home</span></p>
+              <p class="h3 bi bi-arrow-left-circle-fill">
+                <span class="ms-3">Back To Home</span>
+              </p>
             </button>
           </router-link>
           <router-link
@@ -19,7 +21,9 @@
             to="/homeclient"
           >
             <button style="padding: 0; border: none; background: none">
-              <p class="h3 bi bi-arrow-left-circle-fill"><span class="ms-3">Back To Home</span></p>
+              <p class="h3 bi bi-arrow-left-circle-fill">
+                <span class="ms-3">Back To Home</span>
+              </p>
             </button>
           </router-link>
         </div>
@@ -28,11 +32,7 @@
     <div class="row">
       <div class="col mx-4" style="margin-top: 120px">
         <div class="profile-picture">
-          <img
-            :src="profilePicture"
-            class="rounded-pill"
-            alt="..."
-          />
+          <img :src="profilePicture" class="rounded-pill" alt="..." />
           <br />
           <label class="custom-file-upload mt-3">
             <input @change="uploadProfilePicture" type="file" />
@@ -79,6 +79,16 @@
             v-model="dateOfBirth"
           />
           <div v-if="role == 'designer'">
+            <label for="exampleFormControlInput1" class="form-label"
+              >Specialization</label
+            >
+            <input
+              class="form-control mb-4"
+              type="text"
+              placeholder="Default input"
+              aria-label="default input example"
+              v-model="specialization"
+            />
             <label for="exampleFormControlInput1" class="form-label"
               >No. Rekening Bank (Untuk keperluan transfer client)</label
             >
@@ -132,6 +142,7 @@ export default {
       dateOfBirth: "",
       phoneNumber: "",
       role: "",
+      specialization: "",
       noRek: "",
       atasNama: "",
       profilePicture: null,
@@ -160,6 +171,7 @@ export default {
           dateOfBirth: this.dateOfBirth,
           phoneNumber: this.phoneNumber,
           profilePicture: this.profilePicture,
+          specialization: this.role == "designer" ? this.specialization : "",
           noRekening: this.role == "designer" ? this.noRekening : "",
           atasNamaRekening:
             this.role == "designer" ? this.atasNamaRekening : "",
@@ -186,6 +198,7 @@ export default {
         this.phoneNumber = snapshot.data().phoneNumber;
         this.profilePicture = snapshot.data().profilePicture;
         this.role = snapshot.data().role;
+        this.specialization = snapshot.data().specialization;
         this.noRekening = snapshot.data().noRekening;
         this.atasNamaRekening = snapshot.data().atasNamaRekening;
       });
@@ -220,7 +233,7 @@ input[type="file"] {
 @media only screen and (max-width: 700px) {
   .back-home {
     position: absolute;
-	left: 35px;
+    left: 35px;
   }
 }
 </style>
