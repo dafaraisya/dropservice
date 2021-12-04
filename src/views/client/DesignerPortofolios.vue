@@ -4,84 +4,91 @@
       <Navbar />
     </div>
     <BottomNavbar />
-    <div class="container mw-75 mt-4">
-      <div class="h2 text-start d-flex justify-content-between">
-        <h2>{{ designerName }}'s Portofolios</h2>
-        <div v-if="following">
-          <button
-            @click="follow"
-            type="button"
-            class="btn btn-dark rounded-pill py-0 px-3"
-          >
-            <span class="bi bi-check2-circle fs-5 align-middle" />
-            Following
-          </button>
+    <div class="container mt-4">
+      <div class="row mw-80 mx-auto text-start">
+        <div class="col">
+          <h2>{{ designerName }}'s Portofolios</h2>
         </div>
-        <div v-if="!following">
-          <button
-            @click="follow"
-            type="button"
-            class="btn btn-outline-dark rounded-pill py-0 px-3"
-          >
-            <span class="bi bi-plus fs-5 align-middle" />
-            Follow
-          </button>
+        <div class="col d-flex justify-content-end">         
+          <div v-if="following">
+            <button
+              @click="follow"
+              type="button"
+              class="btn btn-dark rounded-pill py-0 px-3"
+            >
+              <span class="bi bi-check2-circle fs-5 align-middle" />
+              Following
+            </button>
+          </div>
+          <div v-if="!following">
+            <button
+              @click="follow"
+              type="button"
+              class="btn btn-outline-dark rounded-pill py-0 px-3"
+            >
+              <span class="bi bi-plus fs-5 align-middle" />
+              Follow
+            </button>
+          </div>
         </div>
       </div>
-      <vueper-slides
-        v-if="portofolios.length > 0"
-        class="no-shadow arrows-outside"
-        :bullets="false"
-        :visible-slides="4"
-        slide-multiple
-        :gap="3"
-        :slide-ratio="1 / 4"
-        :dragging-distance="70"
-        :breakpoints="breakpoints"
-      >
-        <vueper-slide v-for="(portofolio, i) in portofolios" :key="i">
-          <template #content>
-            <div
-              class="
-                h-100
-                w-100
-                d-flex
-                flex-column
-                justify-content-center
-                align-items-center
-              "
-            >
+      <div class="mw-80 container">
+        <vueper-slides
+          v-if="portofolios.length > 0"
+          class="no-shadow arrows-outside"
+          :bullets="false"
+          :visible-slides="4"
+          slide-multiple
+          :gap="3"
+          :slide-ratio="1 / 4"
+          :dragging-distance="70"
+          :breakpoints="breakpoints"
+        >
+          <vueper-slide v-for="(portofolio, i) in portofolios" :key="i">
+            <template #content>
               <div
                 class="
-                  overflow-hidden
-                  card-img
-                  bg-info
-                  rounded
-                  mb-3
-                  thumbnail-img
+                  h-100
+                  w-100
+                  d-flex
+                  flex-column
+                  justify-content-center
+                  align-items-center
                 "
               >
-                <embed
-                  class="card-img"
-                  :src="portofolio.thumbnail"
-                  alt="portofolio"
-                />
+                <div
+                  class="
+                    overflow-hidden
+                    card-img
+                    bg-info
+                    rounded
+                    mb-3
+                    thumbnail-img
+                  "
+                >
+                  <embed
+                    class="card-img"
+                    :src="portofolio.thumbnail"
+                    alt="portofolio"
+                  />
+                </div>
+                <p class="h-6 fw-bold">{{ portofolio.title }}</p>
+                <router-link
+                  :to="
+                    '/designerportofolios/' +
+                    this.$route.params.designerId +
+                    '/' +
+                    portofolio.docId
+                  "
+                >
+                  <button class="btn btn-secondary">More Info</button>
+                </router-link>
               </div>
-              <p class="h-6 fw-bold">{{ portofolio.title }}</p>
-              <router-link
-                :to="
-                  '/designerportofolios/' +
-                  this.$route.params.designerId +
-                  '/' +
-                  portofolio.docId
-                "
-              >
-                <button class="btn btn-secondary">More Info</button>
-              </router-link>
-            </div>
-          </template>
-        </vueper-slide>
-      </vueper-slides>
+            </template>
+          </vueper-slide>
+        </vueper-slides>
+      </div>
+      <br><br><br>
     </div>
   </div>
 </template>
@@ -260,8 +267,8 @@ export default {
   background-size: cover;
 }
 
-.mw-75 {
-  max-width: 75%;
+.mw-80 {
+  max-width: 80%;
 }
 
 .card-img {
